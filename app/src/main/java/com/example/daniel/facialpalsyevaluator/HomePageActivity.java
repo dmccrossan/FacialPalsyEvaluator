@@ -17,6 +17,8 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+
+
         Patient p = new Patient();
         Log.d("myTag", p.CHI);
     }

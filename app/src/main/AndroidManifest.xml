@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.daniel.facialpalsyevaluator.HomePageActivity" />
-        <activity android:name="com.example.daniel.facialpalsyevaluator.PatResultsActivity"></activity>
+        <activity android:name="com.example.daniel.facialpalsyevaluator.PatResultsActivity" />
+        <activity android:name="com.example.daniel.facialpalsyevaluator.PatientActivity"></activity>
     </application>
 
 </manifest>
