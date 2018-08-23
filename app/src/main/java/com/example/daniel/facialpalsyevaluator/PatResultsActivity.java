@@ -10,6 +10,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
 
 public class PatResultsActivity extends AppCompatActivity {
@@ -17,21 +20,30 @@ public class PatResultsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        List<Patient> patientList;// = new ArrayList<>();
+
+        Intent i = getIntent();
+        patientList = (List<Patient>) i.getSerializableExtra("key");
         setContentView(R.layout.activity_pat_results);
+
+
         TableLayout table = (TableLayout)findViewById(R.id.table);
 
 
 
 //        will call update for however big the search results list is
 //        will be passed in as a parameter from previous page
-        update("blue", table, "HEADER");
-        update("green", table, "gh");
-        update("red", table, "dhj");
+        update("ID","DOB", table, "HEADER");
+
+        for (Patient p : patientList){
+            update(p.chi,p.dob,table,"data");
+        }
 
 
     }
 
-    private void update(String text, TableLayout table, String flag) {
+    private void update(String x,String y, TableLayout table, String flag) {
 
 
         TableRow tr = new TableRow(this);
@@ -40,9 +52,9 @@ public class PatResultsActivity extends AppCompatActivity {
 
         TextView tv = new TextView(this);
         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv.setText(text);
-        tv.setTextSize(50);
-        tr.setPadding(50,50,0,0);
+        tv.setText(x);
+        tv.setTextSize(20);
+        tv.setPadding(70,50,50,0);
         tr.addView(tv);
 
         if (flag.equals("HEADER")) {
@@ -60,9 +72,9 @@ public class PatResultsActivity extends AppCompatActivity {
 
         TextView tv1 = new TextView(this);
         tv1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv1.setText(text);
-        tv1.setTextSize(50);
-        tr.setPadding(50,50,0,0);
+        tv1.setText(y);
+        tv1.setTextSize(20);
+        tv1.setPadding(70,50,50,0);
         tr.addView(tv1);
 //        tr.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {

@@ -6,7 +6,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+
+import java.util.Arrays;
+import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
+
+import static java.security.AccessController.getContext;
 
 public class PatientActivity extends AppCompatActivity {
 
@@ -16,22 +22,31 @@ public class PatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient);
         TableLayout detailsTable = (TableLayout)findViewById(R.id.detailsTable);
 
-        update( detailsTable, new Patient());
+        List<String> headers= Arrays.asList("CHI","Patient", "Name","DOB","Address");
+
+        update (detailsTable, headers);
+        update( detailsTable, new Patient().toList());
     }
 
-    private void update (TableLayout table, Patient p ) {
+    private void update (TableLayout table, List<String> data) {
 
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
-
-        TextView tv = new TextView(this);
-        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv.setText(p.fname);
-        tv.setTextSize(50);
-        tr.setPadding(50,50,0,0);
-        tr.addView(tv);
+        for ( String x : data){
+            colBuilder(x, tr);
+        }
 
         table.addView(tr);
     }
+
+private void colBuilder (String data, TableRow tr) {
+
+    TextView tv = new TextView(this);
+    tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+    tv.setText(data);
+    tv.setTextSize(17);
+    tv.setPadding(30, 50, 0, 0);
+    tr.addView(tv);
+}
 }

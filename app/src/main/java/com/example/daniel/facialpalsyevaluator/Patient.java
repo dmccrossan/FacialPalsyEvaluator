@@ -1,9 +1,13 @@
 package com.example.daniel.facialpalsyevaluator;
 
-public class Patient extends Person {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-    String Address;
-    String CHI;
+public class Patient extends Person implements Serializable {
+
+    String address;
+    String chi;
         String fname;
         String lname;
         String dob;
@@ -12,6 +16,29 @@ public class Patient extends Person {
             fname = "test";
             lname = "bob";
             dob = "sd";
-        CHI = "1234";
+        chi = "1234";
+        address = "201 Hope Street";
+    }
+
+    public Patient (String data){
+
+        String[] tempData = data.split(",");
+        chi     = tempData[0];
+        fname   = tempData[1];
+        lname   = tempData[2];
+        dob     = tempData[3];
+        address = tempData[4];
+
+    }
+
+    public List<String> toList() {
+        List<String> dataList = new ArrayList<>();
+        dataList.add(chi);
+        dataList.add(fname);
+        dataList.add(lname);
+        dataList.add(dob);
+        dataList.add(address);
+
+        return dataList;
     }
 }
