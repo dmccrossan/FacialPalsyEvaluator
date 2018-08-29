@@ -10,6 +10,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class PatResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        List<Patient> patientList;// = new ArrayList<>();
+       final List<Patient> patientList;// = new ArrayList<>();
 
         Intent i = getIntent();
         patientList = (List<Patient>) i.getSerializableExtra("key");
@@ -34,21 +35,24 @@ public class PatResultsActivity extends AppCompatActivity {
 
 //        will call update for however big the search results list is
 //        will be passed in as a parameter from previous page
-        update("ID","DOB", table, "HEADER");
+        update("ID","DOB", table, "HEADER",0,patientList);
+        int counter = 0; // this will be used to provide the row number in the table and the patient selected from the table
 
+// for each loop used as at a quick glace you can see the type of object in the list
         for (Patient p : patientList){
-            update(p.chi,p.dob,table,"data");
+            counter++;
+            update(p.chi,p.dob,table,"data",counter,patientList);
         }
 
 
     }
 
-    private void update(String x,String y, TableLayout table, String flag) {
+    private void update(String x, String y, TableLayout table, String flag, final int position, final List<Patient> patientList) {
 
 
-        TableRow tr = new TableRow(this);
+        final TableRow tr = new TableRow(this);
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
+        tr.setTag(position);
 
         TextView tv = new TextView(this);
         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -64,7 +68,12 @@ public class PatResultsActivity extends AppCompatActivity {
             tr.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     //needs to be changed to going to a new page
-                    startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
+                   // startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
+                    int rowNum = (Integer) tr.getTag();
+                    Intent i = new Intent(PatResultsActivity.this, PatientActivity.class);
+
+                    i.putExtra("key", patientList.get(rowNum -1));
+                    startActivity(i);
                 }
             });
         }

@@ -6,26 +6,47 @@
     android:layout_height="match_parent"
     tools:context="com.example.daniel.facialpalsyevaluator.PatientActivity">
 
-    <TableLayout
-        android:id="@+id/detailsTable"
-        android:layout_width="373dp"
-        android:layout_height="254dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.077">
 
-    </TableLayout>
+    <ScrollView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dip"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal|vertical">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:scrollbars="horizontal|vertical">
+
+
+            <TableLayout
+                android:id="@+id/detailsTable"
+                android:layout_width="600dp"
+                android:layout_height="254dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.461"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.077">
+
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
 
     <TableLayout
         android:id="@+id/appointmentsTable"
@@ -46,20 +67,43 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="264dp"
-        android:layout_height="39dp"
+        android:layout_width="600dp"
+        android:layout_height="35dp"
         android:layout_marginBottom="5dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Patient Details"
-        android:textSize="16pt"
+        android:text="@string/patHeader"
+        android:textSize="12pt"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/detailsTable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="113dp"
+        android:layout_height="106dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/appointmentsTable"
+        app:layout_constraintEnd_toEndOf="@+id/appointmentsTable"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/appointmentsTable"
+        app:layout_constraintTop_toTopOf="@+id/appointmentsTable"
+        app:layout_constraintVertical_bias="0.114"
+        app:srcCompat="@drawable/folder_icon" />
+
 </android.support.constraint.ConstraintLayout>

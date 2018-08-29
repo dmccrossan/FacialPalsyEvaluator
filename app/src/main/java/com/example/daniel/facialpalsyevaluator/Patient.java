@@ -8,16 +8,12 @@ public class Patient extends Person implements Serializable {
 
     String address;
     String chi;
-        String fname;
-        String lname;
-        String dob;
+    String fname;
+    String lname;
+    String dob;
 
     public Patient (){
-            fname = "test";
-            lname = "bob";
-            dob = "sd";
-        chi = "1234";
-        address = "201 Hope Street";
+
     }
 
     public Patient (String data){
@@ -33,12 +29,16 @@ public class Patient extends Person implements Serializable {
 
     public List<String> toList() {
         List<String> dataList = new ArrayList<>();
-        dataList.add(chi);
+       // dataList.add(chi);
         dataList.add(fname);
         dataList.add(lname);
         dataList.add(dob);
         dataList.add(address);
 
         return dataList;
+    }
+
+    public boolean match (String input) {
+        return chi.contains(input) || fname.toLowerCase().contains(input.toLowerCase()) || lname.toLowerCase().contains(input.toLowerCase()) || address.toLowerCase().contains(input.toLowerCase()) || dob.toLowerCase().contains(input.toLowerCase()) ;
     }
 }

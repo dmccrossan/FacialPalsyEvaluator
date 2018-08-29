@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class HomePageActivity extends AppCompatActivity {
     List<Patient> patientList = new ArrayList();
     String filePath ;
 
+    EditText editText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,8 @@ public class HomePageActivity extends AppCompatActivity {
 
       //  mContext = getApplicationContext();
          filePath = getString(R.string.filePath);
+
+
      //   patientList = loadPatients();
 
         String  x = "000000001,Paul,Simon,03/06/1979,10 Hope Street";
@@ -51,14 +56,38 @@ public class HomePageActivity extends AppCompatActivity {
          p = new Patient(x);
 
         patientList.add(p);
+
+        editText =  findViewById(R.id.searchPatient);
     }
+
+   /*
+    public void onClick(View v) {
+        editText.getText().clear(); //or you can use editText.setText("");
+    }
+*/
 
     public void search (View view){
 
-        Intent i = new Intent(HomePageActivity.this, PatResultsActivity.class);
-        i.putExtra("key", (Serializable)patientList);
-        startActivity(i);
+        List<Patient> searchResults = new ArrayList<>();
 
+        for (Patient p : patientList){
+
+            if(p.match(editText.getText().toString())){searchResults.add(p);}
+        }
+
+
+        if (searchResults.size()==1 ){
+            Intent i = new Intent(HomePageActivity.this, PatientActivity.class);
+
+            i.putExtra("key",searchResults.get(0));
+            startActivity(i);
+
+        }
+        else if(searchResults.size()>1) {
+            Intent i = new Intent(HomePageActivity.this, PatResultsActivity.class);
+            i.putExtra("key", (Serializable) searchResults);
+            startActivity(i);
+        }
 
         }
 
