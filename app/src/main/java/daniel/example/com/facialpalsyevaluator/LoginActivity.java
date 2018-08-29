@@ -16,22 +16,22 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void login (View view){
+    public void login(View view) {
 
-    boolean authUser = authenticate("daniel", "pass");
+        boolean authUser = authenticate("daniel", "pass");
 
-    if (authUser) {
+        if (authUser) {
 //        if valid user, go to homepage
 
-        Log.d("myTag", "This is my message");
+            Log.d("myTag", "This is my message");
 //                    setContentView(R.layout.activity_home_page);
-        startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+        }
     }
-    }
 
-    private boolean authenticate (String username, String password){
+    private boolean authenticate(String username, String password) {
 
 
-    return true;
+        return true;
     }
 }

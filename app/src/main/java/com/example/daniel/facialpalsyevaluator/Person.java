@@ -6,7 +6,7 @@ public class Person {
     String lname;
     String dob;
 
-    public Person (){
+    public Person() {
         fname = "test";
         lname = "bob";
         dob = "sd";

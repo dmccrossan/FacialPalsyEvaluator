@@ -21,96 +21,160 @@ import daniel.example.com.facialpalsyevaluator.R;
 public class HomePageActivity extends AppCompatActivity {
 
     List<Patient> patientList = new ArrayList();
-    String filePath ;
+    String filePath;
 
-    EditText editText;
+    EditText editTextSearch;
+    EditText editTextFName;
+    EditText editTextLName;
+    EditText editTextDob;
+    EditText editTextAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-      //  mContext = getApplicationContext();
-         filePath = getString(R.string.filePath);
+//         filePath = getString(R.string.filePath);
+        //   patientList = loadPatients();
+
+        setup();
 
 
-     //   patientList = loadPatients();
 
-        String  x = "000000001,Paul,Simon,03/06/1979,10 Hope Street";
-        Patient p = new Patient(x);
-
-        patientList.add(p);
-        x = "000000002,Sam,Smith,15/08/1999,101 Hope Lane";
-         p = new Patient(x);
-
-        patientList.add(p);
-          x = "000000011,Mean Mr.,Mustard,26/09/1969,11 Abbey Road";
-         p = new Patient(x);
-
-        patientList.add(p);
-         x = "000000004,Scott,Scott,09/10/2000,27 Hill Street";
-         p = new Patient(x);
-
-        patientList.add(p);
-         x = "1234567896,Kirk,Xavier,25/12/1889,0 A Way";
-         p = new Patient(x);
-
-        patientList.add(p);
-
-        editText =  findViewById(R.id.searchPatient);
+        editTextSearch = findViewById(R.id.searchPatient);
+        editTextFName = findViewById(R.id.addFName);
+        editTextLName = findViewById(R.id.addLName);
+        editTextDob = findViewById(R.id.addDob);
+        editTextAddress = findViewById(R.id.addAddress);
     }
 
-   /*
-    public void onClick(View v) {
-        editText.getText().clear(); //or you can use editText.setText("");
-    }
-*/
-
-    public void search (View view){
+    public void search(View view) {
 
         List<Patient> searchResults = new ArrayList<>();
 
-        for (Patient p : patientList){
+        for (Patient p : patientList) {
 
-            if(p.match(editText.getText().toString())){searchResults.add(p);}
+            if (p.match(editTextSearch.getText().toString())) {
+                searchResults.add(p);
+            }
         }
+        editTextSearch.setText("");
+        if (searchResults.size() == 1) {
+           goToPatientPage(searchResults.get(0));
 
-
-        if (searchResults.size()==1 ){
-            Intent i = new Intent(HomePageActivity.this, PatientActivity.class);
-
-            i.putExtra("key",searchResults.get(0));
-            startActivity(i);
-
-        }
-        else if(searchResults.size()>1) {
+        } else if (searchResults.size() > 1) {
             Intent i = new Intent(HomePageActivity.this, PatResultsActivity.class);
             i.putExtra("key", (Serializable) searchResults);
             startActivity(i);
         }
+    }
 
-        }
+    private void goToPatientPage(Patient p){
+        Intent i = new Intent(HomePageActivity.this, PatientActivity.class);
 
-        private ArrayList<Patient> loadPatients(){
+        i.putExtra("key", p);
+        startActivity(i);
+    }
 
-            ArrayList<Patient> patientList = new ArrayList();
+    public void addPatient(View view){
 
+        Patient p = new Patient(editTextFName.getText().toString(),editTextLName.getText().toString(),editTextDob.getText().toString(),editTextAddress.getText().toString());
 
-            try {
-                Scanner scanner =  new Scanner(new File(filePath));
-                scanner.useDelimiter(",");
-                while (scanner.hasNext()) {
-                    String  x = scanner.next();
-                    Patient p = new Patient(x);
-                    Log.d("myTag", x);
-                    patientList.add(p);
-                }
-                scanner.close();
+        patientList.add(p);
+        editTextFName.setText("");
+        editTextLName.setText("");
+        editTextDob.setText("");
+        editTextAddress.setText("");
+
+        goToPatientPage(p);
+
+    }
+
+    private ArrayList<Patient> loadPatients() {
+
+        ArrayList<Patient> patientList = new ArrayList();
+
+        try {
+            Scanner scanner = new Scanner(new File(filePath));
+            scanner.useDelimiter(",");
+            while (scanner.hasNext()) {
+                String x = scanner.next();
+                Patient p = new Patient(x);
+                Log.d("myTag", x);
+                patientList.add(p);
             }
-
-            catch (FileNotFoundException e){ Log.d("myTag", e.toString());}
-
-            return patientList;
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            Log.d("myTag", e.toString());
         }
+
+        return patientList;
+    }
+
+    private void setup() {
+        String x = "000000001,Paul,Simon,03/06/1979,10 Hope Street";
+        Patient p = new Patient(x);
+        Appointment a1 = new Appointment("10/10/2001", 1);
+        Appointment a2 = new Appointment("01/11/2001", 2);
+        Appointment a3 = new Appointment("30/11/2001", 3);
+        Appointment a4 = new Appointment("28/12/2001", 4);
+        p.appointments.add(a1);
+        p.appointments.add(a2);
+        p.appointments.add(a3);
+        p.appointments.add(a4);
+        patientList.add(p);
+
+
+        x = "000000002,Sam,Smith,15/08/1999,101 Hope Lane";
+        p = new Patient(x);
+        a1 = new Appointment("10/02/2006", 1);
+        a2 = new Appointment("01/03/2006", 2);
+        a3 = new Appointment("30/04/2006", 3);
+        a4 = new Appointment("28/05/2006", 4);
+        p.appointments.add(a1);
+        p.appointments.add(a2);
+        p.appointments.add(a3);
+        p.appointments.add(a4);
+        patientList.add(p);
+
+
+        x = "000000011,Mean Mr.,Mustard,26/09/1969,11 Abbey Road";
+        p = new Patient(x);
+        a1 = new Appointment("10/09/2003", 1);
+        a2 = new Appointment("01/10/2003", 2);
+        a3 = new Appointment("30/11/2003", 3);
+        a4 = new Appointment("28/12/2003", 4);
+        p.appointments.add(a1);
+        p.appointments.add(a2);
+        p.appointments.add(a3);
+        p.appointments.add(a4);
+        patientList.add(p);
+
+
+        x = "000000004,Scott,Scott,09/10/2000,27 Hill Street";
+        p = new Patient(x);
+        a1 = new Appointment("10/02/2012", 1);
+        a2 = new Appointment("01/03/2012", 2);
+        a3 = new Appointment("30/04/2012", 3);
+        a4 = new Appointment("28/05/2012", 4);
+        p.appointments.add(a1);
+        p.appointments.add(a2);
+        p.appointments.add(a3);
+        p.appointments.add(a4);
+        patientList.add(p);
+
+
+        x = "1234567896,Kirk,Xavier,25/12/1889,0 A Way";
+        p = new Patient(x);
+        a1 = new Appointment("10/02/2006", 1);
+        a2 = new Appointment("01/03/2006", 2);
+        a3 = new Appointment("30/04/2006", 3);
+        a4 = new Appointment("28/05/2006", 4);
+        p.appointments.add(a1);
+        p.appointments.add(a2);
+        p.appointments.add(a3);
+        p.appointments.add(a4);
+        patientList.add(p);
+    }
 
 }

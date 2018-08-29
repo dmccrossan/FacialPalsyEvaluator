@@ -22,26 +22,25 @@ public class PatResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       final List<Patient> patientList;// = new ArrayList<>();
+        final List<Patient> patientList;// = new ArrayList<>();
 
         Intent i = getIntent();
         patientList = (List<Patient>) i.getSerializableExtra("key");
         setContentView(R.layout.activity_pat_results);
 
 
-        TableLayout table = (TableLayout)findViewById(R.id.table);
-
+        TableLayout table = (TableLayout) findViewById(R.id.table);
 
 
 //        will call update for however big the search results list is
 //        will be passed in as a parameter from previous page
-        update("ID","DOB", table, "HEADER",0,patientList);
+        update("ID", "DOB", table, "HEADER", 0, patientList);
         int counter = 0; // this will be used to provide the row number in the table and the patient selected from the table
 
 // for each loop used as at a quick glace you can see the type of object in the list
-        for (Patient p : patientList){
+        for (Patient p : patientList) {
             counter++;
-            update(p.chi,p.dob,table,"data",counter,patientList);
+            update(p.chi, p.dob, table, "data", counter, patientList);
         }
 
 
@@ -58,21 +57,20 @@ public class PatResultsActivity extends AppCompatActivity {
         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         tv.setText(x);
         tv.setTextSize(20);
-        tv.setPadding(70,50,50,0);
+        tv.setPadding(70, 50, 50, 0);
         tr.addView(tv);
 
         if (flag.equals("HEADER")) {
-        }
-        else {
+        } else {
             tr.setClickable(true);
             tr.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     //needs to be changed to going to a new page
-                   // startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
+                    // startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
                     int rowNum = (Integer) tr.getTag();
                     Intent i = new Intent(PatResultsActivity.this, PatientActivity.class);
 
-                    i.putExtra("key", patientList.get(rowNum -1));
+                    i.putExtra("key", patientList.get(rowNum - 1));
                     startActivity(i);
                 }
             });
@@ -83,7 +81,7 @@ public class PatResultsActivity extends AppCompatActivity {
         tv1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         tv1.setText(y);
         tv1.setTextSize(20);
-        tv1.setPadding(70,50,50,0);
+        tv1.setPadding(70, 50, 50, 0);
         tr.addView(tv1);
 //        tr.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
@@ -95,7 +93,7 @@ public class PatResultsActivity extends AppCompatActivity {
 
     }
 
-    public void back (View view) {
+    public void back(View view) {
 
         finish();
     }
