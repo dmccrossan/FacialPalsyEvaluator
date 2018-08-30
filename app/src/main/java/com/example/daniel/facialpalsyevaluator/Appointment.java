@@ -17,7 +17,7 @@ public class Appointment implements Serializable {
     int apNum;
 
     public Appointment() {
-        apDate = "";
+        apDate =  new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         apNum = 1;
         videos = new ArrayList<>();
         notes = new ArrayList<>();

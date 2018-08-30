@@ -9,25 +9,27 @@
 
     <ScrollView
         android:id="@+id/layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dip"
+        android:layout_width="361dp"
+        android:layout_height="124dp"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal|vertical">
+        android:scrollbars="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <HorizontalScrollView
             android:id="@+id/horizontalView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="5dip"
-            android:scrollbars="horizontal|vertical">
+            android:scrollbars="horizontal">
 
 
             <TableLayout
                 android:id="@+id/detailsTable"
-                android:layout_width="600dp"
-                android:layout_height="254dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginLeft="10dp"
@@ -47,34 +49,15 @@
         </HorizontalScrollView>
     </ScrollView>
 
-
-    <TableLayout
-        android:id="@+id/appointmentsTable"
-        android:layout_width="373dp"
-        android:layout_height="285dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsTable">
-
-    </TableLayout>
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="600dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:text="@string/patHeader"
         android:textSize="12pt"
         android:textStyle="bold"
@@ -83,27 +66,86 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="113dp"
-        android:layout_height="106dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:padding="0dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/appointmentsTable"
-        app:layout_constraintEnd_toEndOf="@+id/appointmentsTable"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="@+id/appointmentsTable"
-        app:layout_constraintTop_toTopOf="@+id/appointmentsTable"
-        app:layout_constraintVertical_bias="0.114"
-        app:srcCompat="@drawable/folder_icon" />
+    </TextView>
+
+    <ScrollView
+        android:id="@+id/layoutApt"
+        android:layout_width="300dp"
+        android:layout_height="420dp"
+        android:layout_marginTop="5dp"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalViewApt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:scrollbars="horizontal">
+
+            <TableLayout
+                android:id="@+id/appointmentsTable"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.145"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailsTable"
+                app:layout_constraintVertical_bias="1.0">
+                <!--android:layout_gravity="left">-->
+
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/newAptButton"
+        android:layout_width="402dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="createAppointment"
+        android:text="New Appointment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/imageButton2"-->
+    <!--android:layout_width="113dp"-->
+    <!--android:layout_height="106dp"-->
+    <!--android:layout_marginBottom="16dp"-->
+    <!--android:layout_marginEnd="16dp"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--android:layout_marginStart="16dp"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:padding="0dp"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/appointmentsTable"-->
+    <!--app:layout_constraintEnd_toEndOf="@+id/appointmentsTable"-->
+    <!--app:layout_constraintHorizontal_bias="0.04"-->
+    <!--app:layout_constraintStart_toStartOf="@+id/appointmentsTable"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/appointmentsTable"-->
+    <!--app:layout_constraintVertical_bias="0.114"-->
+    <!--app:srcCompat="@drawable/folder_icon" />-->
 
 </android.support.constraint.ConstraintLayout>

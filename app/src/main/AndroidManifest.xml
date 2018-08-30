@@ -18,7 +18,8 @@
         </activity>
         <activity android:name="com.example.daniel.facialpalsyevaluator.HomePageActivity" />
         <activity android:name="com.example.daniel.facialpalsyevaluator.PatResultsActivity" />
-        <activity android:name="com.example.daniel.facialpalsyevaluator.PatientActivity"></activity>
+        <activity android:name="com.example.daniel.facialpalsyevaluator.PatientActivity" />
+        <activity android:name="com.example.daniel.facialpalsyevaluator.AppointmentActivity"></activity>
     </application>
 
 </manifest>
