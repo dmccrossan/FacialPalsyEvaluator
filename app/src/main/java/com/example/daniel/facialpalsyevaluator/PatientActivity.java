@@ -14,6 +14,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +29,7 @@ public class PatientActivity extends AppCompatActivity {
 
     Patient p;
     TableLayout appointmentsTable;
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class PatientActivity extends AppCompatActivity {
          p = (Patient) i.getSerializableExtra("key");
         TableLayout detailsTable = (TableLayout) findViewById(R.id.detailsTable);
          appointmentsTable = (TableLayout) findViewById(R.id.appointmentsTable);
-
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         final TextView textViewToChange = (TextView) findViewById(R.id.textView);
         String test = "Patient Details - ".concat(p.chi);

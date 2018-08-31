@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +32,14 @@ public class HomePageActivity extends AppCompatActivity {
     EditText editTextDob;
     EditText editTextAddress;
 
+    private StorageReference mStorageRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
 //         filePath = getString(R.string.filePath);
         //   patientList = loadPatients();
@@ -112,7 +119,7 @@ public class HomePageActivity extends AppCompatActivity {
     }
 
     private void setup() {
-        String x = "000000001,Paul,Simon,03/06/1979,10 Hope Street";
+        String x = "0000000001,Paul,Simon,03/06/1979,10 Hope Street";
         Patient p = new Patient(x);
         Appointment a1 = new Appointment("10/10/2001", 1);
         Appointment a2 = new Appointment("01/11/2001", 2);
@@ -125,7 +132,7 @@ public class HomePageActivity extends AppCompatActivity {
         patientList.add(p);
 
 
-        x = "000000002,Sam,Smith,15/08/1999,101 Hope Lane";
+        x = "0000000002,Sam,Smith,15/08/1999,101 Hope Lane";
         p = new Patient(x);
         a1 = new Appointment("10/02/2006", 1);
         a2 = new Appointment("01/03/2006", 2);
@@ -138,7 +145,7 @@ public class HomePageActivity extends AppCompatActivity {
         patientList.add(p);
 
 
-        x = "000000011,Mean Mr.,Mustard,26/09/1969,11 Abbey Road";
+        x = "0000000011,Mean Mr.,Mustard,26/09/1969,11 Abbey Road";
         p = new Patient(x);
         a1 = new Appointment("10/09/2003", 1);
         a2 = new Appointment("01/10/2003", 2);
@@ -151,7 +158,7 @@ public class HomePageActivity extends AppCompatActivity {
         patientList.add(p);
 
 
-        x = "000000004,Scott,Scott,09/10/2000,27 Hill Street";
+        x = "0000000004,Scott,Scott,09/10/2000,27 Hill Street";
         p = new Patient(x);
         a1 = new Appointment("10/02/2012", 1);
         a2 = new Appointment("01/03/2012", 2);

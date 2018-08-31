@@ -7,9 +7,14 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import daniel.example.com.facialpalsyevaluator.R;
 
 public class AppointmentActivity extends AppCompatActivity {
+
+    private StorageReference mStorageRef;
 
     Appointment apt;
 
@@ -23,6 +28,7 @@ public class AppointmentActivity extends AppCompatActivity {
 
         TextView title = (TextView) findViewById(R.id.textView2);
         title.setText("Appointment Details - "+ apt.apDate);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     public void done(View view) {
@@ -30,6 +36,11 @@ public class AppointmentActivity extends AppCompatActivity {
     }
 
 
+public void playVideo(View view){
 
+    Intent i = new Intent(AppointmentActivity.this, VideoPlayerActivity.class);
+
+    startActivity(i);
+}
 
 }
