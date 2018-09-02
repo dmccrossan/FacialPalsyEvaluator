@@ -32,6 +32,7 @@ public class AppointmentActivity extends AppCompatActivity {
     }
 
     public void done(View view) {
+
         finish();
     }
 
@@ -43,4 +44,13 @@ public void playVideo(View view){
     startActivity(i);
 }
 
+
+
+public void recordVideo(View view) {
+
+    Intent i = new Intent(AppointmentActivity.this, RecordVideoActivity.class);
+
+
+    startActivity(i);
+}
 }
