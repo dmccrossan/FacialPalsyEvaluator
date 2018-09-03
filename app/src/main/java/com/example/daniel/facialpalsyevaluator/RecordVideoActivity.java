@@ -10,11 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
+
 public class RecordVideoActivity extends AppCompatActivity {
 
     private static final int VIDEO_CAPTURE = 101;
     private Uri fileUri;
+
+    List<Patient> pList;
+    int pTag;
+    int aptTag;
 
 //    public void startRecording(View view)
 //    {
@@ -25,9 +33,14 @@ public class RecordVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_video);
+        Intent i = getIntent();
 
-        Intent i = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        startActivityForResult(i, VIDEO_CAPTURE);
+        pList = (List<Patient>) i.getSerializableExtra("pList");
+        pTag = (int)i.getSerializableExtra("pTag");
+        aptTag = (int)i.getSerializableExtra("aptTag");
+
+        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        startActivityForResult(intent, VIDEO_CAPTURE);
 
         Button recordButton =
                 (Button) findViewById(R.id.recordButton);
@@ -51,6 +64,9 @@ public class RecordVideoActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(this, "Video saved to:\n" +
                         videoUri, Toast.LENGTH_LONG).show();
+                pList.get(pTag).appointments.get(aptTag).videos.add(videoUri.toString());
+
+                //startActivity(getIntent());
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Video recording cancelled.",
                         Toast.LENGTH_LONG).show();
@@ -59,6 +75,13 @@ public class RecordVideoActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         }
+        Intent i = new Intent(RecordVideoActivity.this, AppointmentActivity.class);
+
+        i.putExtra("pList", (Serializable) pList);
+        i.putExtra("pTag", pTag);
+        i.putExtra("aptTag", aptTag);
+        //   i.putExtra("rowNum", );
+        startActivityForResult(i, 1);
     }
 }
 

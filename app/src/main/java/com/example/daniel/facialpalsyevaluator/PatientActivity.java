@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +28,8 @@ import static java.security.AccessController.getContext;
 
 public class PatientActivity extends AppCompatActivity {
 
-    Patient p;
+    List<Patient> pList;
+    int tag;
     TableLayout appointmentsTable;
     private StorageReference mStorageRef;
 
@@ -36,28 +38,26 @@ public class PatientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
         Intent i = getIntent();
-         p = (Patient) i.getSerializableExtra("key");
+        pList = (List<Patient>) i.getSerializableExtra("pList");
+        tag = (int)i.getSerializableExtra("tag");
         TableLayout detailsTable = (TableLayout) findViewById(R.id.detailsTable);
-         appointmentsTable = (TableLayout) findViewById(R.id.appointmentsTable);
+        appointmentsTable = (TableLayout) findViewById(R.id.appointmentsTable);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         final TextView textViewToChange = (TextView) findViewById(R.id.textView);
-        String test = "Patient Details - ".concat(p.chi);
+        String test = "Patient Details - ".concat(pList.get(tag).chi);
         textViewToChange.setText(test);
 
         List<String> detailsHeaders = Arrays.asList("Patient", "Name", "DOB", "Address");
 
 
-
         updateTextTable(detailsTable, detailsHeaders);
-        updateTextTable(detailsTable, p.toList());
+        updateTextTable(detailsTable, pList.get(tag).toList());
 
 
-
-        updateTextTable(appointmentsTable,GenerateAptHeaders(p.appointments));
-        updateAppointmentsTable(appointmentsTable,p.appointments);
+        updateTextTable(appointmentsTable, GenerateAptHeaders(pList.get(tag).appointments));
+        updateAppointmentsTable(appointmentsTable, pList.get(tag).appointments);
     }
-
 
 
     private void updateTextTable(TableLayout table, List<String> data) {
@@ -96,10 +96,10 @@ public class PatientActivity extends AppCompatActivity {
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         for (Appointment x : apt) {
-            aptColBuilder(x, tr,apt);
+            aptColBuilder(x, tr, apt);
         }
 
-      //  aptColBuilder("   ", tr);
+        //  aptColBuilder("   ", tr);
 
         table.addView(tr);
     }
@@ -114,25 +114,24 @@ public class PatientActivity extends AppCompatActivity {
         tr.addView(tv);
     }
 
-    private void aptColBuilder( Appointment apt, TableRow tr,final List<Appointment> aptList) {
+    private void aptColBuilder(Appointment apt, TableRow tr, final List<Appointment> aptList) {
 
 
-       // TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        // TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         //lp.addRule(TableRow.CENTER_IN_PARENT,1);
         //lp.height = 100;
         //lp.width = 100;
 
 
-
         final ImageButton folder = new ImageButton(this);
         folder.setImageResource(R.drawable.folder_icon);
         folder.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-       // folder.setLayoutParams(lp);
+        // folder.setLayoutParams(lp);
         folder.setScaleX(0.25f); // <- resized by scaling
         folder.setScaleY(0.25f);
-       // folder.setScaleType(ImageView.ScaleType.FIT_XY);
+        // folder.setScaleType(ImageView.ScaleType.FIT_XY);
         folder.setTag(apt.apNum);
-      //  tr.setGravity(Gravity.START);
+        //  tr.setGravity(Gravity.START);
 
         tr.addView(folder);
         //tr.setPadding(-100,-50,-500,-50);
@@ -145,54 +144,54 @@ public class PatientActivity extends AppCompatActivity {
                 int rowNum = (Integer) folder.getTag();
                 Intent i = new Intent(PatientActivity.this, AppointmentActivity.class);
 
-                i.putExtra("apt", p.appointments.get(rowNum-1));
-             //   i.putExtra("rowNum", );
-                startActivity(i);
+                i.putExtra("pList", (Serializable) pList);
+                i.putExtra("pTag", tag);
+                i.putExtra("aptTag", rowNum-1);
+                //   i.putExtra("rowNum", );
+                startActivityForResult(i, 1);
             }
         });
     }
 
-    private List<String>  GenerateAptHeaders (List<Appointment> apt){
+    private List<String> GenerateAptHeaders(List<Appointment> apt) {
 
         List<String> data = new ArrayList<>();
 
-        for (Appointment a : apt){
+        for (Appointment a : apt) {
             data.add(a.apNum + ". " + a.apDate);
         }
         return data;
     }
 
-    public void createAppointment (View view) {
+    public void createAppointment(View view) {
 
         Appointment a = new Appointment();
-        a.apNum = p.appointments.size()+ 1;
-        p.appointments.add(a);
+        a.apNum = pList.get(tag).appointments.size() + 1;
+        pList.get(tag).appointments.add(a);
 
         finish();
         startActivity(getIntent());
 
         Intent i = new Intent(PatientActivity.this, AppointmentActivity.class);
 
-        i.putExtra("apt", a);
-      //  i.putExtra("rowNum", a.apNum);
-        startActivity(i);
-
+        i.putExtra("pList", (Serializable) pList);
+        i.putExtra("pTag", tag);
+        i.putExtra("aptTag", a.apNum-1);
+        //  i.putExtra("rowNum", a.apNum);
+        startActivityForResult(i,1);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-//        if (requestCode == 1) {
-//
-//            if(resultCode == RESULT_OK){
-//                //Update List
-
-                setResult(RESULT_OK, null);
-                finish();
-//            }
-//            if (resultCode == RESULT_CANCELED) {
-//                //Do nothing?
-//            }
-        }
+        //   super.onActivityResult(requestCode, resultCode, data);
+        // if (requestCode == 1) {
+        //  if(resultCode == RESULT_OK) {
+        pList = (List<Patient>) data.getExtras().get("pList");
+        //   }
+        // }
+        pList.get(0).fname = "dfghj";
+    }
     //onActivityResult
+
+
 
 }

@@ -27,7 +27,7 @@ public class Patient extends Person implements Serializable {
         this.lname = lname;
         this.dob = dob;
         this.address = address;
-        appointments =  new ArrayList<>();
+        appointments = new ArrayList<>();
 
     }
 
@@ -39,7 +39,7 @@ public class Patient extends Person implements Serializable {
         lname = tempData[2];
         dob = tempData[3];
         address = tempData[4];
-        appointments =  new ArrayList<>();
+        appointments = new ArrayList<>();
 
     }
 

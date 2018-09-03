@@ -1,5 +1,6 @@
 package com.example.daniel.facialpalsyevaluator;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -26,16 +28,20 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import daniel.example.com.facialpalsyevaluator.R;
 
 public class VideoPlayerActivity extends AppCompatActivity {
 
-    private VideoView videoView;
-    private MediaController mediaController;
-    String TAG = "VideoPlayer";
-     StorageReference mStorageRef;
-   // private FirebaseAuth mAuth;
+////    private VideoView videoView;
+//    private MediaController mediaController;
+//    String TAG = "VideoPlayer";
+//    StorageReference mStorageRef;
+//
+//    public VideoView vid;
+
+    // private FirebaseAuth mAuth;
 
 //    @Override
 //    public void onStart() {
@@ -45,60 +51,51 @@ public class VideoPlayerActivity extends AppCompatActivity {
 //        updateUI(currentUser);
 //    }
 
+    private VideoView videoView;
+    private MediaController mediaController;
+    String TAG = "VideoPlayer";
+
+    List<Patient> pList;
+    int pTag;
+    int aptTag;
+    int vidTag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
+        Intent i = getIntent();
 
-        AssetManager mngr = getAssets();
-        try {
-        //    InputStream is = mngr.open("assets\\video_alfie.mp4");
-            configureVideoView("C:\\\\Users\\Daniel\\AndroidStudioProjects\\FacialPalsyEvaluator\\app\\src\\main\\assets\\video_alfie.mp4");
-           // configureVideoView("video_alfie.mp4");
-
-        }
-        catch (Exception e){}
-//        mStorageRef = FirebaseStorage.getInstance().getReference();
-//        mAuth = FirebaseAuth.getInstance();
-//
-//        mAuth.signInAnonymously()
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "signInAnonymously:success");
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                            accessFirebase();
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-//                            Toast.makeText(VideoPlayerActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    }
-//
-//                });
+        pList = (List<Patient>) i.getSerializableExtra("pList");
+        pTag = (int)i.getSerializableExtra("pTag");
+        aptTag = (int)i.getSerializableExtra("aptTag");
+        vidTag = (int)i.getSerializableExtra("vidTag");
 
 
-
+        configureVideoView();
     }
 
-    private void configureVideoView(String path) {
+    private void configureVideoView() {
 
         videoView =
                 findViewById(R.id.videoView1);
 
-        videoView.setVideoPath(path);
+//       File storageDir = new File(
+//                Environment.getExternalStoragePublicDirectory(
+//                        Environment.DIRECTORY_DCIM
+//                ),"/Camera");
 
+       String temp = pList.get(pTag).appointments.get(aptTag).videos.get(vidTag);
+       // videoView.setVideoPath("/Internal storage/DCIM/Camera/20180903_125256.mp4");
+
+        videoView.setVideoPath(temp);
         MediaController mediaController = new
                 MediaController(this);
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
         videoView.setOnPreparedListener(new
-                                                MediaPlayer.OnPreparedListener()  {
+                                                MediaPlayer.OnPreparedListener() {
                                                     @Override
                                                     public void onPrepared(MediaPlayer mp) {
                                                         mp.setLooping(true);
@@ -108,6 +105,35 @@ public class VideoPlayerActivity extends AppCompatActivity {
                                                 });
         videoView.start();
     }
+
+}
+
+
+//VideoView vid;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_video_player);
+//
+//        vid = (VideoView)findViewById(R.id.videoView1);
+//
+//    }
+//
+//    public void playVideo(View v) {
+//        MediaController m = new MediaController(this);
+//        vid.setMediaController(m);
+//
+//        String path = "E://DCIM//Camera//20180903_125256.mp4";
+//
+//        Uri u = Uri.parse(path);
+//
+//        vid.setVideoURI(u);
+//
+//        vid.start();
+//
+//    }
+//}
 
    /*  public void accessFirebase(){
 
@@ -181,5 +207,4 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
 
 
-    }
 

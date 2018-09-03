@@ -1,6 +1,8 @@
 package com.example.daniel.facialpalsyevaluator;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 
     String fname;
     String lname;

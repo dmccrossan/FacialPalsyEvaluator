@@ -70,7 +70,8 @@ public class PatResultsActivity extends AppCompatActivity {
                     int rowNum = (Integer) tr.getTag();
                     Intent i = new Intent(PatResultsActivity.this, PatientActivity.class);
 
-                    i.putExtra("key", patientList.get(rowNum - 1));
+                    i.putExtra("pList" ,(Serializable) patientList);
+                    i.putExtra("tag" ,rowNum-1);
                     startActivity(i);
                 }
             });

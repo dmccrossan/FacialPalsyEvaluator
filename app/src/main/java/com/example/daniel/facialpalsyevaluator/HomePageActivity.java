@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import daniel.example.com.facialpalsyevaluator.LoginActivity;
+//import daniel.example.com.facialpalsyevaluator.LoginActivity;
 import daniel.example.com.facialpalsyevaluator.R;
 
 
@@ -47,7 +47,6 @@ public class HomePageActivity extends AppCompatActivity {
         setup();
 
 
-
         editTextSearch = findViewById(R.id.searchPatient);
         editTextFName = findViewById(R.id.addFName);
         editTextLName = findViewById(R.id.addLName);
@@ -67,7 +66,7 @@ public class HomePageActivity extends AppCompatActivity {
         }
         editTextSearch.setText("");
         if (searchResults.size() == 1) {
-           goToPatientPage(searchResults.get(0));
+            goToPatientPage(searchResults,0);
 
         } else if (searchResults.size() > 1) {
             Intent i = new Intent(HomePageActivity.this, PatResultsActivity.class);
@@ -76,16 +75,17 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
-    private void goToPatientPage(Patient p){
+    private void goToPatientPage(List<Patient> p, int tag) {
         Intent i = new Intent(HomePageActivity.this, PatientActivity.class);
 
-        i.putExtra("key", p);
+        i.putExtra("pList", (Serializable)  p);
+        i.putExtra("tag", tag);
         startActivity(i);
     }
 
-    public void addPatient(View view){
+    public void addPatient(View view) {
 
-        Patient p = new Patient(editTextFName.getText().toString(),editTextLName.getText().toString(),editTextDob.getText().toString(),editTextAddress.getText().toString());
+        Patient p = new Patient(editTextFName.getText().toString(), editTextLName.getText().toString(), editTextDob.getText().toString(), editTextAddress.getText().toString());
 
         patientList.add(p);
         editTextFName.setText("");
@@ -93,7 +93,8 @@ public class HomePageActivity extends AppCompatActivity {
         editTextDob.setText("");
         editTextAddress.setText("");
 
-        goToPatientPage(p);
+        goToPatientPage(patientList,patientList.lastIndexOf(p));
+        // might need to be changed to be the size of the list
 
     }
 

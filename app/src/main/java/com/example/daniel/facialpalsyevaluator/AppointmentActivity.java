@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Serializable;
+import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
 
 public class AppointmentActivity extends AppCompatActivity {
@@ -17,40 +20,71 @@ public class AppointmentActivity extends AppCompatActivity {
     private StorageReference mStorageRef;
 
     Appointment apt;
-
+    List<Patient> pList;
+    int pTag;
+    int aptTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
         Intent i = getIntent();
-        apt = (Appointment) i.getSerializableExtra("apt");
+
+        pList = (List<Patient>) i.getSerializableExtra("pList");
+        pTag = (int)i.getSerializableExtra("pTag");
+        aptTag = (int)i.getSerializableExtra("aptTag");
+
+       // apt = (Appointment) i.getSerializableExtra("apt");
 
         TextView title = (TextView) findViewById(R.id.textView2);
-        title.setText("Appointment Details - "+ apt.apDate);
+        title.setText("Appointment Details - " + pList.get(pTag).appointments.get(aptTag).apDate);
         mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
-    public void done(View view) {
+    public void done(View view){finish();}
 
-        finish();
+    public void finish () {
+
+//        Intent intent = new Intent();
+//        pList.get(pTag).appointments.get(aptTag).apDate = "esrdtfyguhj";
+//        intent.putExtra("pList", (Serializable) pList);
+//        setResult(RESULT_OK, intent);
+//        super.finish();
+
+
+
+        Intent i = new Intent(AppointmentActivity.this, PatientActivity.class);
+
+        i.putExtra("pList" ,(Serializable) pList);
+        i.putExtra("tag" ,pTag);
+        startActivity(i);
     }
 
 
-public void playVideo(View view){
+    public void playVideo(View view) {
 
-    Intent i = new Intent(AppointmentActivity.this, VideoPlayerActivity.class);
+        Intent i = new Intent(AppointmentActivity.this, VideoPlayerActivity.class);
 
-    startActivity(i);
-}
-
-
-
-public void recordVideo(View view) {
-
-    Intent i = new Intent(AppointmentActivity.this, RecordVideoActivity.class);
+        i.putExtra("pList", (Serializable) pList);
+        i.putExtra("pTag", pTag);
+        i.putExtra("aptTag", aptTag);
+        i.putExtra("vidTag", 0);
 
 
-    startActivity(i);
-}
+        startActivity(i);
+    }
+
+
+    public void recordVideo(View view) {
+
+        Intent i = new Intent(AppointmentActivity.this, RecordVideoActivity.class);
+
+        i.putExtra("pList", (Serializable) pList);
+        i.putExtra("pTag", pTag);
+        i.putExtra("aptTag", aptTag);
+
+        startActivity(i);
+
+     //   startActivity(getIntent());
+    }
 }

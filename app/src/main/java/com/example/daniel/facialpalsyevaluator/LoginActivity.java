@@ -1,12 +1,14 @@
-package daniel.example.com.facialpalsyevaluator;
+package com.example.daniel.facialpalsyevaluator;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import daniel.example.com.facialpalsyevaluator.R;
 
-import com.example.daniel.facialpalsyevaluator.HomePageActivity;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,4 +36,8 @@ public class LoginActivity extends AppCompatActivity {
 
         return true;
     }
+
+    List<Patient> pList;
+
+
 }
