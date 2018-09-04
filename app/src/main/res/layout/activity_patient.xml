@@ -73,7 +73,7 @@
     <ScrollView
         android:id="@+id/layoutApt"
         android:layout_width="300dp"
-        android:layout_height="420dp"
+        android:layout_height="365dp"
         android:layout_marginTop="5dp"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
@@ -114,29 +114,24 @@
 
     <Button
         android:id="@+id/newAptButton"
-        android:layout_width="201dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:onClick="createAppointment"
         android:text="New Appointment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/button5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="201dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:onClick="back"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
