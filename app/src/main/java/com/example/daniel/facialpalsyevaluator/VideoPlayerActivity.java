@@ -28,6 +28,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.List;
 
 import daniel.example.com.facialpalsyevaluator.R;
@@ -54,6 +55,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     private VideoView videoView;
     private MediaController mediaController;
     String TAG = "VideoPlayer";
+    String prevPage;
 
     List<Patient> pList;
     int pTag;
@@ -70,7 +72,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         pTag = (int)i.getSerializableExtra("pTag");
         aptTag = (int)i.getSerializableExtra("aptTag");
         vidTag = (int)i.getSerializableExtra("vidTag");
-
+        prevPage = (String) i.getSerializableExtra("prevPage");
 
         configureVideoView();
     }
@@ -106,6 +108,17 @@ public class VideoPlayerActivity extends AppCompatActivity {
         videoView.start();
     }
 
+
+    public void done (View view) {
+        Intent i = new Intent(VideoPlayerActivity.this, AppointmentActivity.class);
+
+        i.putExtra("pList", (Serializable) pList);
+        i.putExtra("pTag", pTag);
+        i.putExtra("aptTag", aptTag);
+        i.putExtra("prevPage", prevPage);
+        //   i.putExtra("rowNum", );
+        startActivity(i);
+    }
 }
 
 

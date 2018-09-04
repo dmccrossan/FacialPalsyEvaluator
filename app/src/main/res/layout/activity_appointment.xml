@@ -74,10 +74,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <LinearLayout
+        <TableLayout
+            android:id="@+id/vidTable"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollView2"
+            app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView2"
+            app:layout_constraintHorizontal_bias="0.532"
+            app:layout_constraintStart_toStartOf="@+id/horizontalScrollView2"
+            app:layout_constraintTop_toTopOf="@+id/horizontalScrollView2"
+            app:layout_constraintVertical_bias="0.571">
+
+        </TableLayout>
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -93,10 +107,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2">
 
-        <LinearLayout
+        <TableLayout
+            android:id="@+id/graphTable"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollView4"
+            app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView4"
+            app:layout_constraintStart_toStartOf="@+id/horizontalScrollView4"
+            app:layout_constraintTop_toTopOf="@+id/horizontalScrollView4">
+
+
+        </TableLayout>
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -112,61 +139,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView4">
 
-        <LinearLayout
+        <TableLayout
+            android:id="@+id/notesTable"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollView5"
+            app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView5"
+            app:layout_constraintStart_toStartOf="@+id/horizontalScrollView5"
+            app:layout_constraintTop_toTopOf="@+id/horizontalScrollView5">
+
+
+        </TableLayout>
     </HorizontalScrollView>
 
-    <TableLayout
-        android:layout_width="359dp"
-        android:layout_height="96dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollView2"
-        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView2"
-        app:layout_constraintHorizontal_bias="0.532"
-        app:layout_constraintStart_toStartOf="@+id/horizontalScrollView2"
-        app:layout_constraintTop_toTopOf="@+id/horizontalScrollView2"
-        app:layout_constraintVertical_bias="0.571">
-
-    </TableLayout>
-
-    <TableLayout
-        android:layout_width="359dp"
-        android:layout_height="96dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollView4"
-        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView4"
-        app:layout_constraintStart_toStartOf="@+id/horizontalScrollView4"
-        app:layout_constraintTop_toTopOf="@+id/horizontalScrollView4">
-
-
-    </TableLayout>
-
-    <TableLayout
-        android:layout_width="359dp"
-        android:layout_height="96dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollView5"
-        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView5"
-        app:layout_constraintStart_toStartOf="@+id/horizontalScrollView5"
-        app:layout_constraintTop_toTopOf="@+id/horizontalScrollView5">
-
-
-    </TableLayout>
 </android.support.constraint.ConstraintLayout>

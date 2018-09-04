@@ -23,6 +23,7 @@ public class RecordVideoActivity extends AppCompatActivity {
     List<Patient> pList;
     int pTag;
     int aptTag;
+    String prevPage;
 
 //    public void startRecording(View view)
 //    {
@@ -38,6 +39,7 @@ public class RecordVideoActivity extends AppCompatActivity {
         pList = (List<Patient>) i.getSerializableExtra("pList");
         pTag = (int)i.getSerializableExtra("pTag");
         aptTag = (int)i.getSerializableExtra("aptTag");
+        prevPage = (String) i.getSerializableExtra("prevPage");
 
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         startActivityForResult(intent, VIDEO_CAPTURE);
@@ -80,8 +82,9 @@ public class RecordVideoActivity extends AppCompatActivity {
         i.putExtra("pList", (Serializable) pList);
         i.putExtra("pTag", pTag);
         i.putExtra("aptTag", aptTag);
+        i.putExtra("prevPage", prevPage);
         //   i.putExtra("rowNum", );
-        startActivityForResult(i, 1);
+        startActivity(i);
     }
 }
 

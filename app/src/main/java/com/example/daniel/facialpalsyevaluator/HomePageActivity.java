@@ -37,14 +37,23 @@ public class HomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+            Intent i = getIntent();
+            patientList = (List<Patient>) i.getSerializableExtra("pList");
+
+            if (patientList == null) {
+                patientList = new ArrayList();
+                setup();
+            }
+
+
         setContentView(R.layout.activity_home_page);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+        // mStorageRef = FirebaseStorage.getInstance().getReference();
 
 //         filePath = getString(R.string.filePath);
         //   patientList = loadPatients();
-
-        setup();
 
 
         editTextSearch = findViewById(R.id.searchPatient);
@@ -66,11 +75,11 @@ public class HomePageActivity extends AppCompatActivity {
         }
         editTextSearch.setText("");
         if (searchResults.size() == 1) {
-            goToPatientPage(searchResults,0);
+            goToPatientPage(searchResults, 0);
 
         } else if (searchResults.size() > 1) {
             Intent i = new Intent(HomePageActivity.this, PatResultsActivity.class);
-            i.putExtra("key", (Serializable) searchResults);
+            i.putExtra("pList", (Serializable) searchResults);
             startActivity(i);
         }
     }
@@ -78,7 +87,7 @@ public class HomePageActivity extends AppCompatActivity {
     private void goToPatientPage(List<Patient> p, int tag) {
         Intent i = new Intent(HomePageActivity.this, PatientActivity.class);
 
-        i.putExtra("pList", (Serializable)  p);
+        i.putExtra("pList", (Serializable) p);
         i.putExtra("tag", tag);
         i.putExtra("prevPage", "home");
         startActivity(i);
@@ -94,7 +103,7 @@ public class HomePageActivity extends AppCompatActivity {
         editTextDob.setText("");
         editTextAddress.setText("");
 
-        goToPatientPage(patientList,patientList.lastIndexOf(p));
+        goToPatientPage(patientList, patientList.lastIndexOf(p));
         // might need to be changed to be the size of the list
 
     }

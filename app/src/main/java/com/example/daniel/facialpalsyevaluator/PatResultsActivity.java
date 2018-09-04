@@ -29,7 +29,7 @@ public class PatResultsActivity extends AppCompatActivity {
         final List<Patient> patientList;// = new ArrayList<>();
 
         Intent i = getIntent();
-        patientList = (List<Patient>) i.getSerializableExtra("key");
+        patientList = (List<Patient>) i.getSerializableExtra("pList");
         setContentView(R.layout.activity_pat_results);
 
 
