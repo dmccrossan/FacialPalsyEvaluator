@@ -28,8 +28,7 @@
     <TableLayout
         android:id="@+id/table"
         android:layout_width="357dp"
-        android:layout_height="534dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="482dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -38,12 +37,10 @@
         android:gravity="top"
         android:orientation="horizontal"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!--<TableRow-->
         <!--android:id="@+id/ID"-->
@@ -64,4 +61,21 @@
         <!--android:visibility="visible" />-->
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginLeft="292dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="40dp"
+        android:onClick="back"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table" />
 </android.support.constraint.ConstraintLayout>

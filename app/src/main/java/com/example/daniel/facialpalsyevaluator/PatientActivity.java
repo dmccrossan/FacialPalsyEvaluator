@@ -32,6 +32,8 @@ public class PatientActivity extends AppCompatActivity {
     int tag;
     TableLayout appointmentsTable;
     private StorageReference mStorageRef;
+    String prevPage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,9 @@ public class PatientActivity extends AppCompatActivity {
         Intent i = getIntent();
         pList = (List<Patient>) i.getSerializableExtra("pList");
         tag = (int)i.getSerializableExtra("tag");
+
+        prevPage = (String) i.getSerializableExtra("prevPage");
+
         TableLayout detailsTable = (TableLayout) findViewById(R.id.detailsTable);
         appointmentsTable = (TableLayout) findViewById(R.id.appointmentsTable);
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -192,6 +197,23 @@ public class PatientActivity extends AppCompatActivity {
     }
     //onActivityResult
 
+    public void back (View view) {
 
+        Intent i;
+        if (prevPage.equals("search")) {
+            i = new Intent(PatientActivity.this, PatResultsActivity.class);
+
+            i.putExtra("key", (Serializable) pList);
+        }
+        else if (prevPage.equals("home")){
+            i = new Intent(PatientActivity.this, HomePageActivity.class);
+        }
+        else{
+            i = new Intent(PatientActivity.this, HomePageActivity.class);
+            // should never hit this line
+        }
+        startActivity(i);
+
+    }
 
 }

@@ -18,6 +18,10 @@ import daniel.example.com.facialpalsyevaluator.R;
 
 public class PatResultsActivity extends AppCompatActivity {
 
+    List<Patient> pList;
+    int pTag;
+    int aptTag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,7 @@ public class PatResultsActivity extends AppCompatActivity {
 
                     i.putExtra("pList" ,(Serializable) patientList);
                     i.putExtra("tag" ,rowNum-1);
+                    i.putExtra("prevPage", "search");
                     startActivity(i);
                 }
             });
@@ -96,8 +101,13 @@ public class PatResultsActivity extends AppCompatActivity {
 
     public void back(View view) {
 
-        finish();
+        Intent i = new Intent(PatResultsActivity.this, HomePageActivity.class);
+
+        i.putExtra("pList" ,(Serializable) pList);
+        //i.putExtra("tag" ,pTag);
+        startActivity(i);
     }
+}
 
 //    public boolean onOptionsItemSelected(MenuItem item){
 //        Intent myIntent = new Intent(getApplicationContext(), HomePageActivity.class);
@@ -105,4 +115,4 @@ public class PatResultsActivity extends AppCompatActivity {
 //        return true;
 //
 //    }
-}
+

@@ -80,6 +80,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         i.putExtra("pList", (Serializable)  p);
         i.putExtra("tag", tag);
+        i.putExtra("prevPage", "home");
         startActivity(i);
     }
 
