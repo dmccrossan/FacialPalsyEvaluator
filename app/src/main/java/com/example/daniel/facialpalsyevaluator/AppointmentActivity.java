@@ -13,6 +13,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import daniel.example.com.facialpalsyevaluator.R;
@@ -28,7 +29,8 @@ public class AppointmentActivity extends AppCompatActivity {
     String prevPage;
     TableLayout vidTable;
     TableLayout graphTable;
-    TableLayout notesTable;
+    List<String> graphList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,29 +49,73 @@ public class AppointmentActivity extends AppCompatActivity {
         title.setText("Appointment Details - " + pList.get(pTag).appointments.get(aptTag).apDate);
         vidTable = (TableLayout) findViewById(R.id.vidTable);
         graphTable = (TableLayout) findViewById(R.id.graphTable);
-        notesTable = (TableLayout) findViewById(R.id.notesTable);
 
-        updateVidTable(vidTable, pList.get(pTag).appointments.get(aptTag).videos);
+
+        updateTable(vidTable, pList.get(pTag).appointments.get(aptTag).videos,"vid");
+        graphList = new ArrayList<>();
+        graphList.add(pList.get(pTag).appointments.get(aptTag).facograms);
+        if(pList.get(pTag).appointments.get(aptTag).videos.size()>0) {
+            updateTable(graphTable, graphList, "graph");
+        }
+
     }
 
-public void updateVidTable(TableLayout vidTable,List<String> videos){
+public void updateTable(TableLayout table,List<String> data, String flag){
     TableRow tr = new TableRow(this);
 
     tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-    int counter = 0;
-    for (String x : videos) {
-        vidColBuilder(x, tr, videos,counter);
-        counter++;
-    }
+
+        switch (flag) {
+
+            case "vid":
+                int counter = 0;
+                for (String x : data) {
+                    vidColBuilder(tr, counter);
+                    counter++;
+                }
+                break;
+
+            case "graph":
+                graphColBuilder(tr, 0);
+               // counter++;
+                break;
+
+//            case "note":
+//            int counter = 0;
+//            for (String x : data) {
+//                noteColBuilder(tr,  counter);
+//                counter++;
+//            }
+//                break;
+
+            default:
+                break;
+        }
+
 
     //  aptColBuilder("   ", tr);
 
-    vidTable.addView(tr);
+    table.addView(tr);
 
 }
 
-    private void vidColBuilder(String path, TableRow tr, final List<String> vidList,final int counter) {
+private void graphColBuilder(TableRow tr,final int counter) {
+
+    final ImageButton graph = new ImageButton(this);
+    graph.setImageResource(R.drawable.facogram_icon);
+    graph.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+    graph.setScaleX(0.90f); // <- resized by scaling
+    graph.setScaleY(0.90f);
+
+    graph.setTag(counter);
+    tr.addView(graph);
+
+
+
+}
+
+    private void vidColBuilder(TableRow tr,final int counter) {
 
         final ImageButton vid = new ImageButton(this);
         vid.setImageResource(R.drawable.video_icon);
@@ -124,14 +170,13 @@ public void updateVidTable(TableLayout vidTable,List<String> videos){
     }
 
 
-    public void playVideo(View view) {
+    public void notes (View view) {
 
-        Intent i = new Intent(AppointmentActivity.this, VideoPlayerActivity.class);
+        Intent i = new Intent(AppointmentActivity.this, NotesActivity.class);
 
         i.putExtra("pList", (Serializable) pList);
         i.putExtra("pTag", pTag);
         i.putExtra("aptTag", aptTag);
-        i.putExtra("vidTag", 0);
         i.putExtra("prevPage" ,prevPage);
 
 

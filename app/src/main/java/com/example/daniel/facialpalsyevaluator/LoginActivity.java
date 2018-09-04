@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+
 import daniel.example.com.facialpalsyevaluator.R;
 
 
@@ -12,6 +14,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
+    EditText username;
+    EditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +24,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view) {
 
-        boolean authUser = authenticate("daniel", "pass");
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+
+        boolean authUser = authenticate(username.getText().toString(), password.getText().toString());
 
         if (authUser) {
 //        if valid user, go to homepage
@@ -31,9 +38,15 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private boolean authenticate(String username, String password) {
+    private boolean authenticate(String u, String p) {
 
-
+//        if (u.contains("@") && p.length()>=6) {
+//            return true;
+//        } else {
+//            username.setText("");
+//            password.setText("");
+//            return false;
+//        }
         return true;
     }
 

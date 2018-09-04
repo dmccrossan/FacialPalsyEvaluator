@@ -12,16 +12,21 @@ public class Appointment implements Serializable {
 
     String apDate;
     List<String> videos;
-    List<String> notes;
-    List<String> facograms;
+    String notes;
     int apNum;
+    String facograms;
+
+    // The Facograms aren't actually used in the code as I don't have data to build them but I have code
+    // to show how the system would deal with them
+
+
 
     public Appointment() {
         apDate =  new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         apNum = 1;
         videos = new ArrayList<>();
-        notes = new ArrayList<>();
-        facograms = new ArrayList<>();
+        notes = "";
+        facograms ="";
     }
 
     public Appointment(String date, int number) {
@@ -30,7 +35,7 @@ public class Appointment implements Serializable {
         apDate = date;
         apNum = number;
         videos = new ArrayList<>();
-        notes = new ArrayList<>();
-        facograms = new ArrayList<>();
+        notes = "";
+        facograms = "";
     }
 }

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
@@ -56,7 +55,7 @@ public class HomePageActivity extends AppCompatActivity {
         //   patientList = loadPatients();
 
 
-        editTextSearch = findViewById(R.id.searchPatient);
+        editTextSearch = findViewById(R.id.password);
         editTextFName = findViewById(R.id.addFName);
         editTextLName = findViewById(R.id.addLName);
         editTextDob = findViewById(R.id.addDob);
