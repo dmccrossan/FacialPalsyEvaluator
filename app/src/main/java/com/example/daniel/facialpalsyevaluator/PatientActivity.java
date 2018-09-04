@@ -32,6 +32,8 @@ public class PatientActivity extends AppCompatActivity {
     int tag;
     TableLayout appointmentsTable;
     private StorageReference mStorageRef;
+    String prevPage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,12 @@ public class PatientActivity extends AppCompatActivity {
         Intent i = getIntent();
         pList = (List<Patient>) i.getSerializableExtra("pList");
         tag = (int)i.getSerializableExtra("tag");
+
+        prevPage = (String) i.getSerializableExtra("prevPage");
+
         TableLayout detailsTable = (TableLayout) findViewById(R.id.detailsTable);
         appointmentsTable = (TableLayout) findViewById(R.id.appointmentsTable);
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+
 
         final TextView textViewToChange = (TextView) findViewById(R.id.textView);
         String test = "Patient Details - ".concat(pList.get(tag).chi);
@@ -147,8 +152,9 @@ public class PatientActivity extends AppCompatActivity {
                 i.putExtra("pList", (Serializable) pList);
                 i.putExtra("pTag", tag);
                 i.putExtra("aptTag", rowNum-1);
+                i.putExtra("prevPage", prevPage);
                 //   i.putExtra("rowNum", );
-                startActivityForResult(i, 1);
+                startActivity(i);
             }
         });
     }
@@ -177,21 +183,32 @@ public class PatientActivity extends AppCompatActivity {
         i.putExtra("pList", (Serializable) pList);
         i.putExtra("pTag", tag);
         i.putExtra("aptTag", a.apNum-1);
+        i.putExtra("prevPage", prevPage);
+
         //  i.putExtra("rowNum", a.apNum);
-        startActivityForResult(i,1);
+        startActivity(i);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //   super.onActivityResult(requestCode, resultCode, data);
-        // if (requestCode == 1) {
-        //  if(resultCode == RESULT_OK) {
-        pList = (List<Patient>) data.getExtras().get("pList");
-        //   }
-        // }
-        pList.get(0).fname = "dfghj";
+
+
+    public void back (View view) {
+
+        Intent i;
+        if (prevPage.equals("search")) {
+            i = new Intent(PatientActivity.this, PatResultsActivity.class);
+
+
+        }
+        else if (prevPage.equals("home")){
+            i = new Intent(PatientActivity.this, HomePageActivity.class);
+        }
+        else{
+            i = new Intent(PatientActivity.this, HomePageActivity.class);
+            // should never hit this line
+        }
+        i.putExtra("pList", (Serializable) pList);
+        startActivity(i);
+
     }
-    //onActivityResult
-
-
 
 }
