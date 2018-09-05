@@ -2,6 +2,8 @@ package com.example.daniel.facialpalsyevaluator;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -54,13 +56,16 @@ public class PatResultsActivity extends AppCompatActivity {
 
 
         final TableRow tr = new TableRow(this);
+
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         tr.setTag(position);
 
         TextView tv = new TextView(this);
         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         tv.setText(x);
+
         tv.setTextSize(20);
+        tv.setPaintFlags(tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         tv.setPadding(70, 50, 50, 0);
         tr.addView(tv);
 
