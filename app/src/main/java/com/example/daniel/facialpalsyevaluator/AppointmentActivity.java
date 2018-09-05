@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import daniel.example.com.facialpalsyevaluator.R;
 
 public class AppointmentActivity extends AppCompatActivity {
 
-    private StorageReference mStorageRef;
+
 
     Appointment apt;
     List<Patient> pList;
@@ -62,7 +63,7 @@ public class AppointmentActivity extends AppCompatActivity {
 public void updateTable(TableLayout table,List<String> data, String flag){
     TableRow tr = new TableRow(this);
 
-    tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+  //  tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
 
         switch (flag) {
@@ -103,7 +104,7 @@ private void graphColBuilder(TableRow tr,final int counter) {
 
     final ImageButton graph = new ImageButton(this);
     graph.setImageResource(R.drawable.facogram_icon);
-    graph.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+ //   graph.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
     graph.setScaleX(0.90f); // <- resized by scaling
     graph.setScaleY(0.90f);
 
@@ -118,18 +119,20 @@ private void graphColBuilder(TableRow tr,final int counter) {
 
         final ImageButton vid = new ImageButton(this);
         vid.setImageResource(R.drawable.video_icon);
-        vid.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        vid.setScaleX(0.25f); // <- resized by scaling
-        vid.setScaleY(0.25f);
 
+     vid.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+       // vid.setScaleX(0.30f); // <- resized by scaling
+     // vid.setScaleY(0.50f);
+
+      //  vid.setScaleType(ImageView.ScaleType.FIT_XY);
         vid.setTag(counter);
+        // vid.layout(1,50,5,50);
         tr.addView(vid);
 
 
         vid.setClickable(true);
         vid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //needs to be changed to going to a new page
                 // startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
                 int rowNum = (Integer) vid.getTag();
                 Intent i = new Intent(AppointmentActivity.this, VideoPlayerActivity.class);

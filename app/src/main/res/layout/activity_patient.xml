@@ -72,14 +72,18 @@
 
     <ScrollView
         android:id="@+id/layoutApt"
-        android:layout_width="300dp"
-        android:layout_height="365dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="350dp"
+        android:layout_height="375dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="1dp"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout">
 
@@ -88,6 +92,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
+            android:layout_marginEnd="1dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="1dp"
             android:scrollbars="horizontal">
 
             <TableLayout
@@ -95,10 +103,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="0dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -109,7 +109,15 @@ public class HomePageActivity extends AppCompatActivity {
 
     private ArrayList<Patient> loadPatients() {
 
+        ////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
+///////////              USE INPUT STREAM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
         ArrayList<Patient> patientList = new ArrayList();
+
 
         try {
             Scanner scanner = new Scanner(new File(filePath));

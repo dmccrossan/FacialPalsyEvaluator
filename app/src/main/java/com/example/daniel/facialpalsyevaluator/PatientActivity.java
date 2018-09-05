@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -34,6 +35,9 @@ public class PatientActivity extends AppCompatActivity {
     private StorageReference mStorageRef;
     String prevPage;
 
+    ScrollView scrollView;
+    HorizontalScrollView horizontalScrollView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,8 @@ public class PatientActivity extends AppCompatActivity {
         TableLayout detailsTable = (TableLayout) findViewById(R.id.detailsTable);
         appointmentsTable = (TableLayout) findViewById(R.id.appointmentsTable);
 
-
+        scrollView = (ScrollView) findViewById(R.id.layoutApt);
+        horizontalScrollView= (HorizontalScrollView) findViewById(R.id.horizontalViewApt);
         final TextView textViewToChange = (TextView) findViewById(R.id.textView);
         String test = "Patient Details - ".concat(pList.get(tag).chi);
         textViewToChange.setText(test);
@@ -62,6 +67,12 @@ public class PatientActivity extends AppCompatActivity {
 
         updateTextTable(appointmentsTable, GenerateAptHeaders(pList.get(tag).appointments));
         updateAppointmentsTable(appointmentsTable, pList.get(tag).appointments);
+
+      //  appointmentsTable.setScaleX(0.70f);
+       // appointmentsTable.setScaleY(0.70f);
+      //  scrollView.setScaleX(0.70f);
+       // scrollView.setScaleY(0.70f);
+
     }
 
 
@@ -76,7 +87,7 @@ public class PatientActivity extends AppCompatActivity {
          * *******************************************************************************
          ********************************************************************************
          */
-        tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+     //   tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
         for (String x : data) {
             textColBuilder(x, tr);
@@ -98,7 +109,7 @@ public class PatientActivity extends AppCompatActivity {
          * *******************************************************************************
          ********************************************************************************
          */
-        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         for (Appointment x : apt) {
             aptColBuilder(x, tr, apt);
@@ -112,34 +123,45 @@ public class PatientActivity extends AppCompatActivity {
     private void textColBuilder(String data, TableRow tr) {
 
         TextView tv = new TextView(this);
-        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
         tv.setText(data);
         tv.setTextSize(17);
         tv.setPadding(30, 50, 0, 0);
+
         tr.addView(tv);
+     //   tr.setScaleX(0.50f);
+       // tr.setScaleY(0.50f);
     }
 
     private void aptColBuilder(Appointment apt, TableRow tr, final List<Appointment> aptList) {
 
 
-        // TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-        //lp.addRule(TableRow.CENTER_IN_PARENT,1);
-        //lp.height = 100;
-        //lp.width = 100;
 
 
         final ImageButton folder = new ImageButton(this);
         folder.setImageResource(R.drawable.folder_icon);
-        folder.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+     //   folder.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
         // folder.setLayoutParams(lp);
-        folder.setScaleX(0.25f); // <- resized by scaling
-        folder.setScaleY(0.25f);
-        // folder.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
+       // folder.setScaleX(0.50f); // <- resized by scaling
+       // folder.setScaleY(0.55f);
+      //  folder.setScaleType(ImageView.ScaleType.FIT_START);
+
+       // horizontalScrollView.setScaleX(0.70f);
+      //  horizontalScrollView.setScaleY(0.70f);
+
         folder.setTag(apt.apNum);
         //  tr.setGravity(Gravity.START);
 
         tr.addView(folder);
+    //    tr.setScaleX(0.50f);
+      //  tr.setScaleY(0.50f);
+
         //tr.setPadding(-100,-50,-500,-50);
+
+
+      //  scrolview.lay
 
         folder.setClickable(true);
         folder.setOnClickListener(new View.OnClickListener() {
