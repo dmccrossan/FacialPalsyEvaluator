@@ -5,19 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import com.google.firebase.storage.StorageReference;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
 
 
 public class HomePageActivity extends AppCompatActivity {
 
-    List<Patient> patientList = new ArrayList();
+   static List<Patient> patientList = new ArrayList();
 
     EditText editTextSearch;
     EditText editTextFName;
@@ -37,7 +38,7 @@ public class HomePageActivity extends AppCompatActivity {
         if (patientList == null) {
             patientList = new ArrayList();
             loadPatients();
-            loadAppointments();
+            loadAppointments(patientList);
         }
 
         setContentView(R.layout.activity_home_page);
@@ -118,7 +119,7 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
-    private void loadAppointments() {
+    public static void loadAppointments(List<Patient> patientList) {
 
         Appointment a1 = new Appointment("10/10/2001", 1);
         Appointment a2 = new Appointment("01/11/2001", 2);

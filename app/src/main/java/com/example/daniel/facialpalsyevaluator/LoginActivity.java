@@ -11,8 +11,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText username;
-    EditText password;
+    static EditText username;
+    static EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +26,22 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
 
-        boolean authUser = authenticate(username.getText().toString(), password.getText().toString());
+        boolean authUser = authenticate(username.getText().toString(), password.getText().toString(),username,password);
 
         if (authUser) {
             startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
         }
     }
 
-    private boolean authenticate(String u, String p) {
+    public static boolean authenticate(String u, String p, EditText username, EditText password) {
 
-//        if (u.contains("@") && p.length()>=6) {
-//            return true;
-//        } else {
-//            username.setText("");
-//            password.setText("");
-//            return false;
-//        }
-        return true;
+        if (u.contains("@") && p.length()>=6) {
+            return true;
+        } else {
+            username.setText("");
+            password.setText("");
+            return false;
+        }
+
     }
 }

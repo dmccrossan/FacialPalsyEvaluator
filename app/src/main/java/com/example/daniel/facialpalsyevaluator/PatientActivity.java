@@ -55,7 +55,6 @@ public class PatientActivity extends AppCompatActivity {
         updateAppointmentsTable(appointmentsTable, pList.get(tag).appointments);
     }
 
-
     private void updateTextTable(TableLayout table, List<String> data) {
 
         TableRow tr = new TableRow(this);
@@ -110,7 +109,7 @@ public class PatientActivity extends AppCompatActivity {
         });
     }
 
-    private List<String> GenerateAptHeaders(List<Appointment> apt) {
+    public static List<String> GenerateAptHeaders(List<Appointment> apt) {
 
         List<String> data = new ArrayList<>();
 

@@ -9,10 +9,10 @@ import java.util.List;
 
 public class Appointment implements Serializable {
 
-    String apDate;
+    public String apDate;
     List<String> videos;
     String notes;
-    int apNum;
+    public int apNum;
     String facograms;
 
     // The Facograms aren't actually used in the code as I don't have data to build them but I have code

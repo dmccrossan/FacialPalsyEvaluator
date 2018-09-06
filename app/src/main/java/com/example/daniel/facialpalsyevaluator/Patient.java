@@ -6,12 +6,22 @@ import java.util.List;
 
 public class Patient implements Serializable {
 
-    String address;
-    String chi;
-    String fname;
-    String lname;
-    String dob;
-    List<Appointment> appointments;
+    public String address;
+    public String chi;
+    public String fname;
+    public String lname;
+    public String dob;
+    public List<Appointment> appointments;
+
+    public Patient(){
+        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+        chi = String.valueOf(number);
+        fname = "";
+        lname ="";
+        dob="";
+        address="";
+        appointments = new ArrayList<>();
+    }
 
     public Patient(String fname, String lname, String dob, String address) {
 
