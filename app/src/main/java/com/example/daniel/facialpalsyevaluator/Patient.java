@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Creates patient class - details all the attributes and methods of each patient
+ */
 public class Patient implements Serializable {
 
     public String address;
@@ -13,13 +16,13 @@ public class Patient implements Serializable {
     public String dob;
     public List<Appointment> appointments;
 
-    public Patient(){
+    public Patient() {
         long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
         chi = String.valueOf(number);
         fname = "";
-        lname ="";
-        dob="";
-        address="";
+        lname = "";
+        dob = "";
+        address = "";
         appointments = new ArrayList<>();
     }
 
@@ -45,6 +48,7 @@ public class Patient implements Serializable {
         appointments = new ArrayList<>();
     }
 
+    // Builds a string list of patient details
     public List<String> toList() {
 
         List<String> dataList = new ArrayList<>();
@@ -56,6 +60,7 @@ public class Patient implements Serializable {
         return dataList;
     }
 
+    // Checks if the input string is contained within one of the attributes
     public boolean match(String input) {
         return chi.contains(input) || fname.toLowerCase().contains(input.toLowerCase()) || lname.toLowerCase().contains(input.toLowerCase()) || address.toLowerCase().contains(input.toLowerCase()) || dob.toLowerCase().contains(input.toLowerCase());
     }

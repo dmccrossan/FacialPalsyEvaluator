@@ -10,13 +10,17 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
 
-
+/*
+Loads patient page
+ */
 public class PatientActivity extends AppCompatActivity {
 
     List<Patient> pList;
@@ -26,6 +30,7 @@ public class PatientActivity extends AppCompatActivity {
     ScrollView scrollView;
     HorizontalScrollView horizontalScrollView;
 
+    // loads and sets variables and sets up tables to be displayed for the page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -33,7 +38,7 @@ public class PatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient);
         Intent i = getIntent();
         pList = (List<Patient>) i.getSerializableExtra("pList");
-        tag = (int)i.getSerializableExtra("tag");
+        tag = (int) i.getSerializableExtra("tag");
 
         prevPage = (String) i.getSerializableExtra("prevPage");
 
@@ -41,7 +46,7 @@ public class PatientActivity extends AppCompatActivity {
         appointmentsTable = findViewById(R.id.appointmentsTable);
 
         scrollView = findViewById(R.id.layoutApt);
-        horizontalScrollView= findViewById(R.id.horizontalViewApt);
+        horizontalScrollView = findViewById(R.id.horizontalViewApt);
         final TextView textViewToChange = findViewById(R.id.textView);
         String test = "Patient Details - ".concat(pList.get(tag).chi);
         textViewToChange.setText(test);
@@ -55,6 +60,7 @@ public class PatientActivity extends AppCompatActivity {
         updateAppointmentsTable(appointmentsTable, pList.get(tag).appointments);
     }
 
+    // Creates row in the table
     private void updateTextTable(TableLayout table, List<String> data) {
 
         TableRow tr = new TableRow(this);
@@ -65,6 +71,7 @@ public class PatientActivity extends AppCompatActivity {
         table.addView(tr);
     }
 
+    // Creates row in the table
     private void updateAppointmentsTable(TableLayout table, List<Appointment> apt) {
 
         TableRow tr = new TableRow(this);
@@ -76,6 +83,7 @@ public class PatientActivity extends AppCompatActivity {
         table.addView(tr);
     }
 
+    //Creates columns in the table and populates them with text
     private void textColBuilder(String data, TableRow tr) {
 
         TextView tv = new TextView(this);
@@ -86,6 +94,7 @@ public class PatientActivity extends AppCompatActivity {
         tr.addView(tv);
     }
 
+    //Creates columns in the table and populates them with an icon
     private void aptColBuilder(Appointment apt, TableRow tr) {
 
         final ImageButton folder = new ImageButton(this);
@@ -101,7 +110,7 @@ public class PatientActivity extends AppCompatActivity {
 
                 i.putExtra("pList", (Serializable) pList);
                 i.putExtra("pTag", tag);
-                i.putExtra("aptTag", rowNum-1);
+                i.putExtra("aptTag", rowNum - 1);
                 i.putExtra("prevPage", prevPage);
 
                 startActivity(i);
@@ -109,6 +118,7 @@ public class PatientActivity extends AppCompatActivity {
         });
     }
 
+    // Creates headers for appointment table combining appointment number and date
     public static List<String> GenerateAptHeaders(List<Appointment> apt) {
 
         List<String> data = new ArrayList<>();
@@ -119,6 +129,7 @@ public class PatientActivity extends AppCompatActivity {
         return data;
     }
 
+    //Creates new appointment and loads appointment page
     public void createAppointment(View view) {
 
         Appointment a = new Appointment();
@@ -132,24 +143,25 @@ public class PatientActivity extends AppCompatActivity {
 
         i.putExtra("pList", (Serializable) pList);
         i.putExtra("pTag", tag);
-        i.putExtra("aptTag", a.apNum-1);
+        i.putExtra("aptTag", a.apNum - 1);
         i.putExtra("prevPage", prevPage);
 
         startActivity(i);
     }
 
-    public void back (View view) {
+    // Returns to previous page
+    public void back(View view) {
 
         Intent i = new Intent();
         switch (prevPage) {
 
             case "search":
-            i = new Intent(PatientActivity.this, PatResultsActivity.class);
-            break;
+                i = new Intent(PatientActivity.this, PatResultsActivity.class);
+                break;
 
             case "home":
-            i = new Intent(PatientActivity.this, HomePageActivity.class);
-            break;
+                i = new Intent(PatientActivity.this, HomePageActivity.class);
+                break;
 
             default:
                 break;

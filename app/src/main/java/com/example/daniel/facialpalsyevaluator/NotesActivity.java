@@ -5,9 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
 import java.io.Serializable;
 import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
+
+/*
+Loads notes page
+ */
 
 public class NotesActivity extends AppCompatActivity {
 
@@ -17,6 +23,7 @@ public class NotesActivity extends AppCompatActivity {
     int aptTag;
     String prevPage;
 
+    // loads and sets variables and sets up tables to be displayed for the page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,9 +38,10 @@ public class NotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notes);
 
         text = findViewById(R.id.note);
-        text.setText( pList.get(pTag).appointments.get(aptTag).notes);
+        text.setText(pList.get(pTag).appointments.get(aptTag).notes);
     }
 
+    // returns to previous page
     public void done(View view) {
 
         text = findViewById(R.id.note);

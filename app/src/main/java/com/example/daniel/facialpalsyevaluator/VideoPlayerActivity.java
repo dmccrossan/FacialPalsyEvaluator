@@ -8,11 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
 import java.io.Serializable;
 import java.util.List;
 
 import daniel.example.com.facialpalsyevaluator.R;
 
+/*
+Loads video player page
+ */
 public class VideoPlayerActivity extends AppCompatActivity {
 
     private VideoView videoView;
@@ -23,6 +27,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     int aptTag;
     int vidTag;
 
+    // loads and sets variables for the page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,19 +35,20 @@ public class VideoPlayerActivity extends AppCompatActivity {
         Intent i = getIntent();
 
         pList = (List<Patient>) i.getSerializableExtra("pList");
-        pTag = (int)i.getSerializableExtra("pTag");
-        aptTag = (int)i.getSerializableExtra("aptTag");
-        vidTag = (int)i.getSerializableExtra("vidTag");
+        pTag = (int) i.getSerializableExtra("pTag");
+        aptTag = (int) i.getSerializableExtra("aptTag");
+        vidTag = (int) i.getSerializableExtra("vidTag");
         prevPage = (String) i.getSerializableExtra("prevPage");
 
         configureVideoView();
     }
 
+    //sets up video player and plays chosen video
     private void configureVideoView() {
 
         videoView = findViewById(R.id.videoView1);
 
-       String temp = pList.get(pTag).appointments.get(aptTag).videos.get(vidTag);
+        String temp = pList.get(pTag).appointments.get(aptTag).videos.get(vidTag);
 
         videoView.setVideoPath(temp);
         MediaController mediaController = new MediaController(this);
@@ -59,8 +65,8 @@ public class VideoPlayerActivity extends AppCompatActivity {
         videoView.start();
     }
 
-
-    public void done (View view) {
+    // Returns to previous page
+    public void done(View view) {
 
         Intent i = new Intent(VideoPlayerActivity.this, AppointmentActivity.class);
 

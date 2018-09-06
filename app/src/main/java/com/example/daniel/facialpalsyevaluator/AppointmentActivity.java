@@ -15,6 +15,10 @@ import java.util.List;
 
 import daniel.example.com.facialpalsyevaluator.R;
 
+/*
+Creates page on app that will display appointments
+ */
+
 public class AppointmentActivity extends AppCompatActivity {
 
 
@@ -26,7 +30,7 @@ public class AppointmentActivity extends AppCompatActivity {
     TableLayout vidTable;
     TableLayout graphTable;
 
-
+    // loads and sets variables and sets up tables to be displayed for the page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,6 +58,7 @@ public class AppointmentActivity extends AppCompatActivity {
         }
     }
 
+    //  Creates the row(s) for the tables on screen
     public void updateTable(TableLayout table, List<String> data, String flag) {
 
         TableRow tr = new TableRow(this);
@@ -78,6 +83,7 @@ public class AppointmentActivity extends AppCompatActivity {
         table.addView(tr);
     }
 
+    // Creates column(s) for the table and populates them
     private void graphColBuilder(TableRow tr, final int counter) {
 
         final ImageButton graph = new ImageButton(this);
@@ -88,6 +94,7 @@ public class AppointmentActivity extends AppCompatActivity {
         tr.addView(graph);
     }
 
+    // Creates column(s) for the table and populates them
     private void vidColBuilder(TableRow tr, final int counter) {
 
         final ImageButton vid = new ImageButton(this);
@@ -112,12 +119,13 @@ public class AppointmentActivity extends AppCompatActivity {
         });
     }
 
-
+    //    calls the finish method
     public void done(View view) {
 
         finish();
     }
 
+    // goes back to the previous page
     public void finish() {
 
         Intent i = new Intent(AppointmentActivity.this, PatientActivity.class);
@@ -127,7 +135,7 @@ public class AppointmentActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
+    //    Loads notes page
     public void notes(View view) {
 
         Intent i = new Intent(AppointmentActivity.this, NotesActivity.class);
@@ -140,7 +148,7 @@ public class AppointmentActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
+    // Loads video recording page
     public void recordVideo(View view) {
 
         Intent i = new Intent(AppointmentActivity.this, RecordVideoActivity.class);

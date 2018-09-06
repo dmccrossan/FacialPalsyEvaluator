@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+/*
+Appointment class - details all the attributes and methods of each appointment
+ */
 public class Appointment implements Serializable {
 
     public String apDate;
@@ -14,8 +16,7 @@ public class Appointment implements Serializable {
     String notes;
     public int apNum;
     String facograms;
-
-    // The Facograms aren't actually used in the code as I don't have data to build them but I have code
+    // The facograms aren't actually used in the code as I don't have data to build them but I have code
     // to show how the system would deal with them
 
 

@@ -15,10 +15,12 @@ import java.util.List;
 
 import daniel.example.com.facialpalsyevaluator.R;
 
-
+/*
+Creates home page that allows user to search for existing patients or create new patients
+ */
 public class HomePageActivity extends AppCompatActivity {
 
-   static List<Patient> patientList = new ArrayList();
+    static List<Patient> patientList = new ArrayList();
 
     EditText editTextSearch;
     EditText editTextFName;
@@ -26,7 +28,7 @@ public class HomePageActivity extends AppCompatActivity {
     EditText editTextDob;
     EditText editTextAddress;
 
-
+    // loads and sets variables and sets up tables to be displayed for the page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,6 +52,8 @@ public class HomePageActivity extends AppCompatActivity {
         editTextAddress = findViewById(R.id.addAddress);
     }
 
+    // Uses user input to search for patient and if the user input matches more than one patient
+//    then results page is launched otherwise user is taken directly to the patient page
     public void search(View view) {
 
         List<Patient> searchResults = new ArrayList<>();
@@ -71,6 +75,7 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
+    //Loads patient page
     private void goToPatientPage(List<Patient> p, int tag) {
 
         Intent i = new Intent(HomePageActivity.this, PatientActivity.class);
@@ -81,6 +86,7 @@ public class HomePageActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    // creates new patient based on information entered in text fields by user
     public void addPatient(View view) {
 
         Patient p = new Patient(editTextFName.getText().toString(), editTextLName.getText().toString(), editTextDob.getText().toString(), editTextAddress.getText().toString());
@@ -94,6 +100,7 @@ public class HomePageActivity extends AppCompatActivity {
         goToPatientPage(patientList, patientList.lastIndexOf(p));
     }
 
+    // Reads patient information from csv file and builds a list of patients
     private void loadPatients() {
 
         BufferedReader reader = null;
@@ -119,6 +126,7 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
+    // Creates default appointments for patients
     public static void loadAppointments(List<Patient> patientList) {
 
         Appointment a1 = new Appointment("10/10/2001", 1);

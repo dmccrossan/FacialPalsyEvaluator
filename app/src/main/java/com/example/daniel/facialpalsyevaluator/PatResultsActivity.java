@@ -8,14 +8,20 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
 import java.io.Serializable;
 import java.util.List;
+
 import daniel.example.com.facialpalsyevaluator.R;
 
+/*
+Creates results page that displays the results of the search
+ */
 public class PatResultsActivity extends AppCompatActivity {
 
     List<Patient> pList;
 
+    // loads and sets variables and sets up tables to be displayed for the page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,7 @@ public class PatResultsActivity extends AppCompatActivity {
         }
     }
 
+    // Creates clickable table rows and columns and populates with the search results
     private void update(String x, String y, TableLayout table, String flag, final int position, final List<Patient> patientList) {
 
         final TableRow tr = new TableRow(this);
@@ -78,6 +85,7 @@ public class PatResultsActivity extends AppCompatActivity {
         table.addView(tr);
     }
 
+    // Returns to previous page
     public void back(View view) {
 
         Intent i = new Intent(PatResultsActivity.this, HomePageActivity.class);
