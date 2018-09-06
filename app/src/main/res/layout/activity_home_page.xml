@@ -48,32 +48,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="First Name" />
+            android:hint="First Name"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/addLName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Last Name" />
+            android:hint="Last Name"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/addDob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Date of Birth e.g dd/mm/yyyy" />
+            android:hint="Date of Birth e.g dd/mm/yyyy"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/addAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Address" />
+            android:hint="Address"
+            android:inputType="textPersonName" />
 
     </LinearLayout>
 
@@ -100,8 +100,8 @@
         android:layout_height="60dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginLeft="0dp"
+        android:layout_marginRight="16dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="24dp"
         android:text="Create New Patient"

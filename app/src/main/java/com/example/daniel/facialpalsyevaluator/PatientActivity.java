@@ -3,44 +3,32 @@ package com.example.daniel.facialpalsyevaluator;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import daniel.example.com.facialpalsyevaluator.R;
 
-import static java.security.AccessController.getContext;
 
 public class PatientActivity extends AppCompatActivity {
 
     List<Patient> pList;
     int tag;
     TableLayout appointmentsTable;
-    private StorageReference mStorageRef;
     String prevPage;
-
     ScrollView scrollView;
     HorizontalScrollView horizontalScrollView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
         Intent i = getIntent();
@@ -49,74 +37,43 @@ public class PatientActivity extends AppCompatActivity {
 
         prevPage = (String) i.getSerializableExtra("prevPage");
 
-        TableLayout detailsTable = (TableLayout) findViewById(R.id.detailsTable);
-        appointmentsTable = (TableLayout) findViewById(R.id.appointmentsTable);
+        TableLayout detailsTable = findViewById(R.id.detailsTable);
+        appointmentsTable = findViewById(R.id.appointmentsTable);
 
-        scrollView = (ScrollView) findViewById(R.id.layoutApt);
-        horizontalScrollView= (HorizontalScrollView) findViewById(R.id.horizontalViewApt);
-        final TextView textViewToChange = (TextView) findViewById(R.id.textView);
+        scrollView = findViewById(R.id.layoutApt);
+        horizontalScrollView= findViewById(R.id.horizontalViewApt);
+        final TextView textViewToChange = findViewById(R.id.textView);
         String test = "Patient Details - ".concat(pList.get(tag).chi);
         textViewToChange.setText(test);
 
         List<String> detailsHeaders = Arrays.asList("Patient", "Name", "DOB", "Address");
 
-
         updateTextTable(detailsTable, detailsHeaders);
         updateTextTable(detailsTable, pList.get(tag).toList());
 
-
         updateTextTable(appointmentsTable, GenerateAptHeaders(pList.get(tag).appointments));
         updateAppointmentsTable(appointmentsTable, pList.get(tag).appointments);
-
-      //  appointmentsTable.setScaleX(0.70f);
-       // appointmentsTable.setScaleY(0.70f);
-      //  scrollView.setScaleX(0.70f);
-       // scrollView.setScaleY(0.70f);
-
     }
 
 
     private void updateTextTable(TableLayout table, List<String> data) {
 
         TableRow tr = new TableRow(this);
-
-        /*
-         *******************************************************************************
-         ********************************************************************************
-         * FIX HORIZONTAL SCROLLING
-         * *******************************************************************************
-         ********************************************************************************
-         */
-     //   tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
         for (String x : data) {
             textColBuilder(x, tr);
         }
-
         textColBuilder("   ", tr);
-
         table.addView(tr);
     }
 
     private void updateAppointmentsTable(TableLayout table, List<Appointment> apt) {
 
         TableRow tr = new TableRow(this);
-
-        /*
-         *******************************************************************************
-         ********************************************************************************
-         * FIX HORIZONTAL SCROLLING
-         * *******************************************************************************
-         ********************************************************************************
-         */
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         for (Appointment x : apt) {
-            aptColBuilder(x, tr, apt);
+            aptColBuilder(x, tr);
         }
-
-        //  aptColBuilder("   ", tr);
-
         table.addView(tr);
     }
 
@@ -127,47 +84,19 @@ public class PatientActivity extends AppCompatActivity {
         tv.setText(data);
         tv.setTextSize(17);
         tv.setPadding(30, 50, 0, 0);
-
         tr.addView(tv);
-     //   tr.setScaleX(0.50f);
-       // tr.setScaleY(0.50f);
     }
 
-    private void aptColBuilder(Appointment apt, TableRow tr, final List<Appointment> aptList) {
-
-
-
+    private void aptColBuilder(Appointment apt, TableRow tr) {
 
         final ImageButton folder = new ImageButton(this);
         folder.setImageResource(R.drawable.folder_icon);
-     //   folder.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-        // folder.setLayoutParams(lp);
-
-
-       // folder.setScaleX(0.50f); // <- resized by scaling
-       // folder.setScaleY(0.55f);
-      //  folder.setScaleType(ImageView.ScaleType.FIT_START);
-
-       // horizontalScrollView.setScaleX(0.70f);
-      //  horizontalScrollView.setScaleY(0.70f);
-
         folder.setTag(apt.apNum);
-        //  tr.setGravity(Gravity.START);
-
         tr.addView(folder);
-    //    tr.setScaleX(0.50f);
-      //  tr.setScaleY(0.50f);
-
-        //tr.setPadding(-100,-50,-500,-50);
-
-
-      //  scrolview.lay
 
         folder.setClickable(true);
         folder.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //needs to be changed to going to a new page
-                // startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
                 int rowNum = (Integer) folder.getTag();
                 Intent i = new Intent(PatientActivity.this, AppointmentActivity.class);
 
@@ -175,7 +104,7 @@ public class PatientActivity extends AppCompatActivity {
                 i.putExtra("pTag", tag);
                 i.putExtra("aptTag", rowNum-1);
                 i.putExtra("prevPage", prevPage);
-                //   i.putExtra("rowNum", );
+
                 startActivity(i);
             }
         });
@@ -207,30 +136,26 @@ public class PatientActivity extends AppCompatActivity {
         i.putExtra("aptTag", a.apNum-1);
         i.putExtra("prevPage", prevPage);
 
-        //  i.putExtra("rowNum", a.apNum);
         startActivity(i);
     }
-
-
 
     public void back (View view) {
 
-        Intent i;
-        if (prevPage.equals("search")) {
+        Intent i = new Intent();
+        switch (prevPage) {
+
+            case "search":
             i = new Intent(PatientActivity.this, PatResultsActivity.class);
+            break;
 
+            case "home":
+            i = new Intent(PatientActivity.this, HomePageActivity.class);
+            break;
 
-        }
-        else if (prevPage.equals("home")){
-            i = new Intent(PatientActivity.this, HomePageActivity.class);
-        }
-        else{
-            i = new Intent(PatientActivity.this, HomePageActivity.class);
-            // should never hit this line
+            default:
+                break;
         }
         i.putExtra("pList", (Serializable) pList);
         startActivity(i);
-
     }
-
 }

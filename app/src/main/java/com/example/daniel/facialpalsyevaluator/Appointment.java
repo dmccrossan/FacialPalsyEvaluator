@@ -1,12 +1,11 @@
 package com.example.daniel.facialpalsyevaluator;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 public class Appointment implements Serializable {
 
@@ -20,17 +19,16 @@ public class Appointment implements Serializable {
     // to show how the system would deal with them
 
 
-
     public Appointment() {
-        apDate =  new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
+        apDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         apNum = 1;
         videos = new ArrayList<>();
         notes = "";
-        facograms ="";
+        facograms = "";
     }
 
     public Appointment(String date, int number) {
-
 
         apDate = date;
         apNum = number;

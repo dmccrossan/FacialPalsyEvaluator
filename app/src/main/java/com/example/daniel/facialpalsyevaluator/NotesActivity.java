@@ -5,15 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
 import java.io.Serializable;
 import java.util.List;
-
 import daniel.example.com.facialpalsyevaluator.R;
 
 public class NotesActivity extends AppCompatActivity {
-
 
     EditText text;
     List<Patient> pList;
@@ -21,9 +17,9 @@ public class NotesActivity extends AppCompatActivity {
     int aptTag;
     String prevPage;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();
@@ -40,7 +36,6 @@ public class NotesActivity extends AppCompatActivity {
 
     public void done(View view) {
 
-
         text = findViewById(R.id.note);
         pList.get(pTag).appointments.get(aptTag).notes = text.getText().toString();
 
@@ -52,6 +47,5 @@ public class NotesActivity extends AppCompatActivity {
         i.putExtra("prevPage", prevPage);
 
         startActivity(i);
-
     }
 }

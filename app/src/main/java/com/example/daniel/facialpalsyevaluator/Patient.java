@@ -3,9 +3,8 @@ package com.example.daniel.facialpalsyevaluator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Patient extends Person implements Serializable {
+public class Patient implements Serializable {
 
     String address;
     String chi;
@@ -13,10 +12,6 @@ public class Patient extends Person implements Serializable {
     String lname;
     String dob;
     List<Appointment> appointments;
-
-    public Patient() {
-
-    }
 
     public Patient(String fname, String lname, String dob, String address) {
 
@@ -28,24 +23,21 @@ public class Patient extends Person implements Serializable {
         this.dob = dob;
         this.address = address;
         appointments = new ArrayList<>();
-
     }
 
-    public Patient(String data) {
+    public Patient(String[] tempData) {
 
-        String[] tempData = data.split(",");
         chi = tempData[0];
         fname = tempData[1];
         lname = tempData[2];
         dob = tempData[3];
         address = tempData[4];
         appointments = new ArrayList<>();
-
     }
 
     public List<String> toList() {
+
         List<String> dataList = new ArrayList<>();
-        // dataList.add(chi);
         dataList.add(fname);
         dataList.add(lname);
         dataList.add(dob);

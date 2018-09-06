@@ -6,18 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
 import daniel.example.com.facialpalsyevaluator.R;
-
-
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText username;
     EditText password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
@@ -30,10 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         boolean authUser = authenticate(username.getText().toString(), password.getText().toString());
 
         if (authUser) {
-//        if valid user, go to homepage
-
-            Log.d("myTag", "This is my message");
-//                    setContentView(R.layout.activity_home_page);
             startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
         }
     }
@@ -49,8 +44,4 @@ public class LoginActivity extends AppCompatActivity {
 //        }
         return true;
     }
-
-    List<Patient> pList;
-
-
 }

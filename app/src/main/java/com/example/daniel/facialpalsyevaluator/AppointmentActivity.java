@@ -5,12 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,50 +18,45 @@ import daniel.example.com.facialpalsyevaluator.R;
 public class AppointmentActivity extends AppCompatActivity {
 
 
-
-    Appointment apt;
-    List<Patient> pList;
     int pTag;
     int aptTag;
     String prevPage;
+    List<Patient> pList;
+    List<String> graphList;
     TableLayout vidTable;
     TableLayout graphTable;
-    List<String> graphList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
         Intent i = getIntent();
 
         pList = (List<Patient>) i.getSerializableExtra("pList");
-        pTag = (int)i.getSerializableExtra("pTag");
-        aptTag = (int)i.getSerializableExtra("aptTag");
+        pTag = (int) i.getSerializableExtra("pTag");
+        aptTag = (int) i.getSerializableExtra("aptTag");
         prevPage = (String) i.getSerializableExtra("prevPage");
 
-       // apt = (Appointment) i.getSerializableExtra("apt");
 
-        TextView title = (TextView) findViewById(R.id.textView2);
+        TextView title = findViewById(R.id.textView2);
         title.setText("Appointment Details - " + pList.get(pTag).appointments.get(aptTag).apDate);
-        vidTable = (TableLayout) findViewById(R.id.vidTable);
-        graphTable = (TableLayout) findViewById(R.id.graphTable);
+        vidTable = findViewById(R.id.vidTable);
+        graphTable = findViewById(R.id.graphTable);
 
 
-        updateTable(vidTable, pList.get(pTag).appointments.get(aptTag).videos,"vid");
+        updateTable(vidTable, pList.get(pTag).appointments.get(aptTag).videos, "vid");
         graphList = new ArrayList<>();
         graphList.add(pList.get(pTag).appointments.get(aptTag).facograms);
-        if(pList.get(pTag).appointments.get(aptTag).videos.size()>0) {
+        if (pList.get(pTag).appointments.get(aptTag).videos.size() > 0) {
             updateTable(graphTable, graphList, "graph");
         }
-
     }
 
-public void updateTable(TableLayout table,List<String> data, String flag){
-    TableRow tr = new TableRow(this);
+    public void updateTable(TableLayout table, List<String> data, String flag) {
 
-  //  tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-
+        TableRow tr = new TableRow(this);
 
         switch (flag) {
 
@@ -78,71 +70,42 @@ public void updateTable(TableLayout table,List<String> data, String flag){
 
             case "graph":
                 graphColBuilder(tr, 0);
-               // counter++;
                 break;
-
-//            case "note":
-//            int counter = 0;
-//            for (String x : data) {
-//                noteColBuilder(tr,  counter);
-//                counter++;
-//            }
-//                break;
 
             default:
                 break;
         }
+        table.addView(tr);
+    }
 
+    private void graphColBuilder(TableRow tr, final int counter) {
 
-    //  aptColBuilder("   ", tr);
+        final ImageButton graph = new ImageButton(this);
+        graph.setImageResource(R.drawable.facogram_icon);
+        graph.setScaleX(0.90f);
+        graph.setScaleY(0.90f);
+        graph.setTag(counter);
+        tr.addView(graph);
+    }
 
-    table.addView(tr);
-
-}
-
-private void graphColBuilder(TableRow tr,final int counter) {
-
-    final ImageButton graph = new ImageButton(this);
-    graph.setImageResource(R.drawable.facogram_icon);
- //   graph.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-    graph.setScaleX(0.90f); // <- resized by scaling
-    graph.setScaleY(0.90f);
-
-    graph.setTag(counter);
-    tr.addView(graph);
-
-
-
-}
-
-    private void vidColBuilder(TableRow tr,final int counter) {
+    private void vidColBuilder(TableRow tr, final int counter) {
 
         final ImageButton vid = new ImageButton(this);
         vid.setImageResource(R.drawable.video_icon);
-
-     vid.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-       // vid.setScaleX(0.30f); // <- resized by scaling
-     // vid.setScaleY(0.50f);
-
-      //  vid.setScaleType(ImageView.ScaleType.FIT_XY);
+        vid.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
         vid.setTag(counter);
-        // vid.layout(1,50,5,50);
         tr.addView(vid);
-
 
         vid.setClickable(true);
         vid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
-                int rowNum = (Integer) vid.getTag();
                 Intent i = new Intent(AppointmentActivity.this, VideoPlayerActivity.class);
 
                 i.putExtra("pList", (Serializable) pList);
                 i.putExtra("pTag", pTag);
                 i.putExtra("aptTag", aptTag);
                 i.putExtra("vidTag", counter);
-                i.putExtra("prevPage" ,prevPage);
-
+                i.putExtra("prevPage", prevPage);
 
                 startActivity(i);
             }
@@ -150,37 +113,29 @@ private void graphColBuilder(TableRow tr,final int counter) {
     }
 
 
+    public void done(View view) {
 
-    public void done(View view){finish();}
+        finish();
+    }
 
-    public void finish () {
-
-//        Intent intent = new Intent();
-//        pList.get(pTag).appointments.get(aptTag).apDate = "esrdtfyguhj";
-//        intent.putExtra("pList", (Serializable) pList);
-//        setResult(RESULT_OK, intent);
-//        super.finish();
-
-
+    public void finish() {
 
         Intent i = new Intent(AppointmentActivity.this, PatientActivity.class);
-
-        i.putExtra("pList" ,(Serializable) pList);
-        i.putExtra("tag" ,pTag);
-        i.putExtra("prevPage" ,prevPage);
+        i.putExtra("pList", (Serializable) pList);
+        i.putExtra("tag", pTag);
+        i.putExtra("prevPage", prevPage);
         startActivity(i);
     }
 
 
-    public void notes (View view) {
+    public void notes(View view) {
 
         Intent i = new Intent(AppointmentActivity.this, NotesActivity.class);
 
         i.putExtra("pList", (Serializable) pList);
         i.putExtra("pTag", pTag);
         i.putExtra("aptTag", aptTag);
-        i.putExtra("prevPage" ,prevPage);
-
+        i.putExtra("prevPage", prevPage);
 
         startActivity(i);
     }
@@ -193,10 +148,8 @@ private void graphColBuilder(TableRow tr,final int counter) {
         i.putExtra("pList", (Serializable) pList);
         i.putExtra("pTag", pTag);
         i.putExtra("aptTag", aptTag);
-        i.putExtra("prevPage" ,prevPage);
+        i.putExtra("prevPage", prevPage);
 
         startActivity(i);
-
-     //   startActivity(getIntent());
     }
 }

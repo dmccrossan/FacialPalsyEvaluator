@@ -1,59 +1,42 @@
 package com.example.daniel.facialpalsyevaluator;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
 import daniel.example.com.facialpalsyevaluator.R;
 
 public class PatResultsActivity extends AppCompatActivity {
 
     List<Patient> pList;
-    int pTag;
-    int aptTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final List<Patient> patientList;// = new ArrayList<>();
+        final List<Patient> patientList;
 
         Intent i = getIntent();
         patientList = (List<Patient>) i.getSerializableExtra("pList");
         setContentView(R.layout.activity_pat_results);
 
+        TableLayout table = findViewById(R.id.table);
 
-        TableLayout table = (TableLayout) findViewById(R.id.table);
-
-
-//        will call update for however big the search results list is
-//        will be passed in as a parameter from previous page
         update("ID", "DOB", table, "HEADER", 0, patientList);
-        int counter = 0; // this will be used to provide the row number in the table and the patient selected from the table
-
-// for each loop used as at a quick glace you can see the type of object in the list
+        int counter = 0;
         for (Patient p : patientList) {
             counter++;
             update(p.chi, p.dob, table, "data", counter, patientList);
         }
-
-
     }
 
     private void update(String x, String y, TableLayout table, String flag, final int position, final List<Patient> patientList) {
-
 
         final TableRow tr = new TableRow(this);
 
@@ -73,20 +56,18 @@ public class PatResultsActivity extends AppCompatActivity {
         } else {
             tr.setClickable(true);
             tr.setOnClickListener(new View.OnClickListener() {
+
                 public void onClick(View v) {
-                    //needs to be changed to going to a new page
-                    // startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
                     int rowNum = (Integer) tr.getTag();
                     Intent i = new Intent(PatResultsActivity.this, PatientActivity.class);
 
-                    i.putExtra("pList" ,(Serializable) patientList);
-                    i.putExtra("tag" ,rowNum-1);
+                    i.putExtra("pList", (Serializable) patientList);
+                    i.putExtra("tag", rowNum - 1);
                     i.putExtra("prevPage", "search");
                     startActivity(i);
                 }
             });
         }
-
 
         TextView tv1 = new TextView(this);
         tv1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -94,30 +75,16 @@ public class PatResultsActivity extends AppCompatActivity {
         tv1.setTextSize(20);
         tv1.setPadding(70, 50, 50, 0);
         tr.addView(tv1);
-//        tr.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                //needs to be changed to going to a new page
-//                startActivity(new Intent(PatResultsActivity.this, PatientActivity.class));
-//            }});
-
         table.addView(tr);
-
     }
 
     public void back(View view) {
 
         Intent i = new Intent(PatResultsActivity.this, HomePageActivity.class);
 
-        i.putExtra("pList" ,(Serializable) pList);
-        //i.putExtra("tag" ,pTag);
+        i.putExtra("pList", (Serializable) pList);
         startActivity(i);
     }
 }
 
-//    public boolean onOptionsItemSelected(MenuItem item){
-//        Intent myIntent = new Intent(getApplicationContext(), HomePageActivity.class);
-//        startActivityForResult(myIntent, 0);
-//        return true;
-//
-//    }
 
