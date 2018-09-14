@@ -17,8 +17,8 @@ public class Patient implements Serializable {
     public List<Appointment> appointments;
 
     public Patient() {
-        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
-        chi = String.valueOf(number);
+        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L; // creates a random 10 digit number
+        chi = String.valueOf(number); // stores the random number as the chi number
         fname = "";
         lname = "";
         dob = "";

@@ -53,7 +53,7 @@ public class HomePageActivity extends AppCompatActivity {
     }
 
     // Uses user input to search for patient and if the user input matches more than one patient
-//    then results page is launched otherwise user is taken directly to the patient page
+    // then results page is launched otherwise user is taken directly to the patient page
     public void search(View view) {
 
         List<Patient> searchResults = new ArrayList<>();
